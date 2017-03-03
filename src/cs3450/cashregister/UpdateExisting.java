@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
@@ -22,8 +25,10 @@ import javax.swing.SwingUtilities;
  * @author Jason Holman Boden Archuleta
  *
  */
-public class UpdateExisting {
+public class UpdateExisting implements ActionListener{
 	
+	private InventoryScreen invScreen;
+	private UpdateProduct updProd;
 	private JFrame frame = new JFrame("Choose Existing Product");
 	private JPanel screen = new JPanel();
 	private JPanel id = new JPanel();
@@ -35,6 +40,7 @@ public class UpdateExisting {
 	private JScrollPane scrollpane;
 	private JLabel label = new JLabel("Enter ID: ");
 	private JTextField text = new JTextField(4);
+	private JButton submit = new JButton("Submit");
 	private JButton back = new JButton("Back");
 	
 	public UpdateExisting() throws FileNotFoundException
@@ -56,6 +62,7 @@ public class UpdateExisting {
 		
 		pane.add(screen);
 		
+		c.insets = new Insets(5, 0, 5, 0);
 		c.gridx = 0;
 		c.gridy = 0;
 		screen.add(scrollpane, c);
@@ -64,7 +71,12 @@ public class UpdateExisting {
 		id.add(text, c);
 		screen.add(id, c);
 		c.gridy ++;
+		submit.setPreferredSize(new Dimension(125, 25));
+		submit.addActionListener(this);
+		screen.add(submit, c);
+		c.gridy ++;
 		back.setPreferredSize(new Dimension(125, 25));
+		back.addActionListener(this);
 		screen.add(back, c);
 		
 		frame.pack();
@@ -72,20 +84,29 @@ public class UpdateExisting {
 		frame.setVisible(true);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-
-			@Override
-			public void run() {
-				try {
-					new UpdateExisting();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}				
-			}});
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton tmp = (JButton)e.getSource();
+		if(tmp == back)
+		{
+			try {
+				invScreen = new InventoryScreen();
+				frame.dispose();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		else if(tmp == submit)
+		{
+			try {
+				updProd = new UpdateProduct();
+				frame.dispose();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }

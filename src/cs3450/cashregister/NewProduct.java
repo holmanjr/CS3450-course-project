@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
@@ -17,8 +19,9 @@ import javax.swing.SwingUtilities;
  * @author Jason Holman Boden Archuleta
  *
  */
-public class NewProduct {
+public class NewProduct implements ActionListener{
 	
+	private InventoryScreen invScreen;
 	private JFrame frame = new JFrame("Add New Product");
 	private JPanel screen = new JPanel();
 	private JTable table;
@@ -28,7 +31,7 @@ public class NewProduct {
 	};
 	private JScrollPane scrollpane;
 	private JButton save = new JButton("Save");
-	private JButton cancel = new JButton("Cancel");
+	private JButton back = new JButton("Back");
 	
 	public NewProduct() throws FileNotFoundException
 	{
@@ -55,30 +58,35 @@ public class NewProduct {
 		screen.add(scrollpane, c);
 		c.gridy ++;
 		save.setPreferredSize(new Dimension(125, 25));
+		save.addActionListener(this);
 		screen.add(save, c);
 		c.gridy ++;
-		cancel.setPreferredSize(new Dimension(125, 25));
-		screen.add(cancel, c);
+		back.setPreferredSize(new Dimension(125, 25));
+		back.addActionListener(this);
+		screen.add(back, c);
 		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-
-			@Override
-			public void run() {
-				try {
-					new NewProduct();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}				
-			}});
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton tmp = (JButton)e.getSource();
+		if(tmp == save)
+		{
+			
+		}
+		else if(tmp == back)
+		{
+			try {
+				invScreen = new InventoryScreen();
+				frame.dispose();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }

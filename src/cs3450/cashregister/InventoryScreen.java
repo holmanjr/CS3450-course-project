@@ -29,7 +29,7 @@ public class InventoryScreen implements ActionListener{
 	/**
 	 *  Constructor to display the inventory screen
 	 */
-	private InventoryScreen() throws FileNotFoundException
+	public InventoryScreen() throws FileNotFoundException
 	{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		
