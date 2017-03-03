@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 
 
 /**
- * @author Jason
+ * @author Jason Holman Boden Archuleta
  *
  */
 public class UpdateProduct {
@@ -55,8 +55,10 @@ public class UpdateProduct {
 		c.gridy = 0;
 		screen.add(scrollpane, c);
 		c.gridy ++;
+		save.setPreferredSize(new Dimension(125, 25));
 		screen.add(save, c);
 		c.gridy ++;
+		cancel.setPreferredSize(new Dimension(125, 25));
 		screen.add(cancel, c);
 		
 		frame.pack();

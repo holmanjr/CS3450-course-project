@@ -1,71 +1,64 @@
-/**
- * 
- */
 package cs3450.cashregister;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 /**
  * @author Jason Holman Boden Archuleta
  *
  */
-public class UpdateExisting {
+public class NewProduct {
 	
-	private JFrame frame = new JFrame("Choose Existing Product");
+	private JFrame frame = new JFrame("Add New Product");
 	private JPanel screen = new JPanel();
-	private JPanel id = new JPanel();
 	private JTable table;
 	private String[] columnNames = {"ID", "Name", "Price", "Quantity"};
 	private String[][] rows = {
-			{"000", "Apple", "2.99", "15"}
+			{"", "", "", ""}
 	};
 	private JScrollPane scrollpane;
-	private JLabel label = new JLabel("Enter ID: ");
-	private JTextField text = new JTextField(4);
-	private JButton back = new JButton("Back");
+	private JButton save = new JButton("Save");
+	private JButton cancel = new JButton("Cancel");
 	
-	public UpdateExisting() throws FileNotFoundException
+	public NewProduct() throws FileNotFoundException
 	{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
 		
 		screen.setLayout(new GridBagLayout());
-		id.setLayout(new FlowLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		screen.setPreferredSize(new Dimension(600, 400));
 		
 		table = new JTable(rows, columnNames);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 50));
+		table.setPreferredScrollableViewportSize(new Dimension(500, 16));
 		table.setFillsViewportHeight(true);
 		
 		scrollpane = new JScrollPane(table);
 		
 		pane.add(screen);
 		
+		c.insets = new Insets(5, 5, 5, 5);
+		
 		c.gridx = 0;
 		c.gridy = 0;
 		screen.add(scrollpane, c);
 		c.gridy ++;
-		id.add(label, c);
-		id.add(text, c);
-		screen.add(id, c);
+		save.setPreferredSize(new Dimension(125, 25));
+		screen.add(save, c);
 		c.gridy ++;
-		back.setPreferredSize(new Dimension(125, 25));
-		screen.add(back, c);
+		cancel.setPreferredSize(new Dimension(125, 25));
+		screen.add(cancel, c);
 		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -81,7 +74,7 @@ public class UpdateExisting {
 			@Override
 			public void run() {
 				try {
-					new UpdateExisting();
+					new NewProduct();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				}				

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
@@ -15,8 +17,10 @@ import javax.swing.SwingUtilities;
  * @author Jason Holman, Boden Archuleta
  * @version 1.0
  */
-public class InventoryScreen {
+public class InventoryScreen implements ActionListener{
 	
+	private UpdateExisting updateScreen;
+	private NewProduct newProd;
 	private JFrame frame = new JFrame("Inventory Management");
 	private JPanel screen = new JPanel();
 	private JButton update = new JButton("Update existing");
@@ -37,8 +41,10 @@ public class InventoryScreen {
 		screen.setPreferredSize(new Dimension(600, 400));		
 		
 		update.setPreferredSize(new Dimension(150, 80));
+		update.addActionListener(this);
 		screen.add(update, gbc);
 		
+		addNew.addActionListener(this);
 		addNew.setPreferredSize(new Dimension(150, 80));
 		screen.add(addNew, gbc);
 		
@@ -64,6 +70,32 @@ public class InventoryScreen {
 					e.printStackTrace();
 				}				
 			}});
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton tmp = (JButton)e.getSource();
+		if(tmp == update)
+		{
+			try {
+				updateScreen = new UpdateExisting();
+				frame.dispose();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		}
+		else if(tmp == addNew)
+		{
+			try {
+				newProd = new NewProduct();
+				frame.dispose();
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 
 }
