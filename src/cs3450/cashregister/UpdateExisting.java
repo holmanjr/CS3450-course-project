@@ -11,6 +11,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,21 +30,18 @@ public class UpdateExisting implements ActionListener{
 	
 	private InventoryScreen invScreen;
 	private UpdateProduct updProd;
+	private Driver driver = new Driver();
 	private JFrame frame = new JFrame("Choose Existing Product");
 	private JPanel screen = new JPanel();
 	private JPanel id = new JPanel();
 	private JTable table;
-	private String[] columnNames = {"ID", "Name", "Price", "Quantity"};
-	private String[][] rows = {
-			{"000", "Apple", "2.99", "15"}
-	};
 	private JScrollPane scrollpane;
 	private JLabel label = new JLabel("Enter ID: ");
 	private JTextField text = new JTextField(4);
 	private JButton submit = new JButton("Submit");
 	private JButton back = new JButton("Back");
 	
-	public UpdateExisting() throws FileNotFoundException
+	public UpdateExisting() throws FileNotFoundException, SQLException
 	{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -54,7 +52,7 @@ public class UpdateExisting implements ActionListener{
 		GridBagConstraints c = new GridBagConstraints();
 		screen.setPreferredSize(new Dimension(600, 400));
 		
-		table = new JTable(rows, columnNames);
+		table = new JTable(driver.getTableData("products"), driver.getColNames("products"));
 		table.setPreferredScrollableViewportSize(new Dimension(500, 50));
 		table.setFillsViewportHeight(true);
 		

@@ -1,6 +1,7 @@
 package cs3450.cashregister;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -10,9 +11,12 @@ import java.io.FileNotFoundException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 /**
@@ -22,14 +26,16 @@ import javax.swing.SwingUtilities;
 public class NewProduct implements ActionListener{
 	
 	private InventoryScreen invScreen;
+	private JPanel lblPanel = new JPanel();
+	private JLabel nameLbl = new JLabel("Name", SwingConstants.CENTER);
+	private JLabel priceLbl = new JLabel("Price", SwingConstants.CENTER);
+	private JLabel qtyLbl = new JLabel("Qty", SwingConstants.CENTER);
+	private JPanel txtPanel = new JPanel();
+	private JTextField nameTxtFld = new JTextField(10);
+	private JTextField priceTxtFld = new JTextField(10);
+	private JTextField qtyTxtFld = new JTextField(10);
 	private JFrame frame = new JFrame("Add New Product");
 	private JPanel screen = new JPanel();
-	private JTable table;
-	private String[] columnNames = {"ID", "Name", "Price", "Quantity"};
-	private String[][] rows = {
-			{"", "", "", ""}
-	};
-	private JScrollPane scrollpane;
 	private JButton save = new JButton("Save");
 	private JButton back = new JButton("Back");
 	
@@ -41,21 +47,29 @@ public class NewProduct implements ActionListener{
 		
 		screen.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
-		screen.setPreferredSize(new Dimension(600, 400));
+		screen.setPreferredSize(new Dimension(600, 400));	
+
+		lblPanel.setLayout(new FlowLayout());
+		nameLbl.setPreferredSize(new Dimension(115, 15));
+		lblPanel.add(nameLbl, c);
+		priceLbl.setPreferredSize(new Dimension(115, 15));
+		lblPanel.add(priceLbl, c);
+		qtyLbl.setPreferredSize(new Dimension(115, 15));
+		lblPanel.add(qtyLbl, c);
 		
-		table = new JTable(rows, columnNames);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 16));
-		table.setFillsViewportHeight(true);
-		
-		scrollpane = new JScrollPane(table);
+		txtPanel.setLayout(new FlowLayout());
+		txtPanel.add(nameTxtFld, c);
+		txtPanel.add(priceTxtFld, c);
+		txtPanel.add(qtyTxtFld, c);
 		
 		pane.add(screen);
 		
 		c.insets = new Insets(5, 5, 5, 5);
-		
 		c.gridx = 0;
 		c.gridy = 0;
-		screen.add(scrollpane, c);
+		screen.add(lblPanel, c);
+		c.gridy ++;
+		screen.add(txtPanel, c);
 		c.gridy ++;
 		save.setPreferredSize(new Dimension(125, 25));
 		save.addActionListener(this);
