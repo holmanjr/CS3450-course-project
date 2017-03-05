@@ -1,11 +1,13 @@
 package cs3450.cashregister;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PaymentScreen implements ActionListener {
@@ -18,12 +20,13 @@ public class PaymentScreen implements ActionListener {
 	
 	public PaymentScreen(){
 		credit.addActionListener(this);
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		screen.setLayout(new GridLayout());
+		screen.setLayout(new GridLayout(2, 2));
+		pane.setPreferredSize(new Dimension(800, 500));
 		pane.setSize(50, 50);
 
+		screen.add(new JLabel(Float.toString(CheckoutScreen.total) + "is due."));
 		screen.add(credit);
 		screen.add(debit);
 		screen.add(cash);

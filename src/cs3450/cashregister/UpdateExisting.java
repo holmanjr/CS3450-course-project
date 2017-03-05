@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cs3450.cashregister;
 
 import java.awt.Dimension;

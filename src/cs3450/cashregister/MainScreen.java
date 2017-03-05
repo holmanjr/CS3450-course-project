@@ -23,7 +23,7 @@ public class MainScreen implements ActionListener {
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		pane.setPreferredSize(new Dimension(500, 200));
+		pane.setPreferredSize(new Dimension(800, 500));
 		pane.setSize(50, 50);
 		screen.setLayout(new GridLayout());
 		
@@ -53,6 +53,4 @@ public class MainScreen implements ActionListener {
 		}
 	}
 }
-
-
 
