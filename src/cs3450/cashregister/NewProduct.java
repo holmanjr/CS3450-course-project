@@ -8,10 +8,12 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,6 +28,7 @@ import javax.swing.SwingUtilities;
 public class NewProduct implements ActionListener{
 	
 	private InventoryScreen invScreen;
+	private Driver driver = new Driver("products");
 	private JPanel lblPanel = new JPanel();
 	private JLabel nameLbl = new JLabel("Name", SwingConstants.CENTER);
 	private JLabel priceLbl = new JLabel("Price", SwingConstants.CENTER);
@@ -89,7 +92,22 @@ public class NewProduct implements ActionListener{
 		JButton tmp = (JButton)e.getSource();
 		if(tmp == save)
 		{
-			
+			if(!nameTxtFld.getText().isEmpty() && !priceTxtFld.getText().isEmpty() && !qtyTxtFld.getText().isEmpty()){
+				try {
+					driver.addRow(nameTxtFld.getText(), priceTxtFld.getText(), qtyTxtFld.getText());
+					new UpdateExisting();
+					frame.dispose();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else{
+				JOptionPane.showMessageDialog(null, "All values need to be inserted");
+			}
 		}
 		else if(tmp == back)
 		{

@@ -35,7 +35,7 @@ public class UpdateProduct implements ActionListener{
 	private JButton save = new JButton("Save");
 	private JButton back = new JButton("Back");
 	
-	public UpdateProduct() throws FileNotFoundException
+	public UpdateProduct(JTable prodTable) throws FileNotFoundException
 	{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,7 +45,7 @@ public class UpdateProduct implements ActionListener{
 		GridBagConstraints c = new GridBagConstraints();
 		screen.setPreferredSize(new Dimension(600, 400));
 		
-		table = new JTable(rows, columnNames);
+		table = prodTable;
 		table.setPreferredScrollableViewportSize(new Dimension(500, 16));
 		table.setFillsViewportHeight(true);
 		

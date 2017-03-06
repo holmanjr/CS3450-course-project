@@ -2,29 +2,32 @@ package cs3450.cashregister;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
 public class Driver {
-	static final String DBURL = "jdbc:mysql://localhost:3306/";
-	static final String USER = "root";
-	static final String PASS = "root";
-	static final String DBNAME = "register";
-	static final String TNAME = "products";
-	static Connection conn = null;
-	static Statement stmt = null;
+	private final String DBURL = "jdbc:mysql://localhost:3306/";
+	private final String USER = "root";
+	private final String PASS = "root";
+	private final String DBNAME = "register";
+	private String TNAME;
+	private final String WARNSUP = "?useSSL=false";
+	private Connection conn = null;
+	private Statement stmt = null;
 	private int colCount;
 	private Vector<String> headers;
-	private Vector<String[]> tableData;
+	private Vector<Vector<Object>> tableData;
 	
-	public Driver(){
+	public Driver(String tName){
+		TNAME = tName;
 		try{
-			conn = DriverManager.getConnection(DBURL, USER, PASS);
+			conn = DriverManager.getConnection(DBURL + WARNSUP, USER, PASS);
 			createDB(DBNAME);
-			conn = DriverManager.getConnection(DBURL + DBNAME, USER, PASS);
-			createTable(TNAME);
+			conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+			createTable();
 		}catch(SQLException se){
 			se.printStackTrace();
 		}catch(Exception e){
@@ -60,8 +63,8 @@ public class Driver {
 		}
 	}
 	
-	public void createTable(String tName) throws SQLException{
-		ResultSet tables = conn.getMetaData().getTables(null, null, tName, null);
+	public void createTable() throws SQLException{
+		ResultSet tables = conn.getMetaData().getTables(null, null, TNAME, null);
 		if (tables.next()) {
 		  // Table exists
 		} 	
@@ -70,8 +73,8 @@ public class Driver {
 			System.out.println("Creating table in given database...");
 			stmt = conn.createStatement();
 			
-			String sql = "CREATE TABLE " + tName +
-					"(prodid INTEGER not NULL," + 
+			String sql = "CREATE TABLE " + TNAME +
+					"(prodid INTEGER not NULL AUTO_INCREMENT," + 
 					"name VARCHAR(30) not NULL," +
 					"price DECIMAL(10, 2) not null," + 
 					"qty INTEGER not null," + 
@@ -82,10 +85,10 @@ public class Driver {
 		}
 	}
 	
-	public Vector<String> getColNames(String tName) throws SQLException{
-		conn = DriverManager.getConnection(DBURL + DBNAME, USER, PASS);
+	public Vector<String> getColNames() throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		stmt = conn.createStatement();
-		String sql = "SELECT * FROM " + tName;
+		String sql = "SELECT * FROM " + TNAME;
 		ResultSet rs = stmt.executeQuery(sql);
 		colCount = rs.getMetaData().getColumnCount();
 		headers = new Vector<String>();
@@ -106,19 +109,19 @@ public class Driver {
 		return headers;
 	}
 	
-	public Vector<String[]> getTableData(String tName) throws SQLException{
-		conn = DriverManager.getConnection(DBURL + DBNAME, USER, PASS);
+	public Vector<Vector<Object>> getTableData() throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		stmt = conn.createStatement();
-		tableData = new Vector<String[]>();
-		String sql = "SELECT * FROM " + tName;
+		tableData = new Vector<Vector<Object>>();
+		String sql = "SELECT * FROM " + TNAME;
 		ResultSet rs = stmt.executeQuery(sql);
 		colCount = rs.getMetaData().getColumnCount();
 		while(rs.next()){
-			String[] record = new String[colCount];
-			for(int i = 0; i < colCount; i++){
-				record[i] = rs.getString(i+1);
+			Vector<Object> record = new Vector<Object>();
+			for(int i = 1; i <= colCount; i++){
+				record.add(rs.getObject(i));
 			}
-			tableData.addElement(record);
+			tableData.add(record);
 		}
 		try{
 			if(stmt!=null)
@@ -132,6 +135,45 @@ public class Driver {
 			se.printStackTrace();
 		}
 		return tableData;
+	}
+	
+	public Vector<Vector<Object>> selectRow(String id) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		stmt = conn.createStatement();
+		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		PreparedStatement pst = conn.prepareStatement("SELECT * FROM " + TNAME +
+				" WHERE prodid = ?"); 
+		pst.setString(1, id);
+		ResultSet rs = pst.executeQuery();
+		colCount = rs.getMetaData().getColumnCount();
+		if(rs.next()){
+			Vector<Object> row = new Vector<Object>();
+			for(int i = 1; i <= colCount; i++){
+			row.add(rs.getObject(i));
+			}
+			data.add(row);
+		}
+		return data;
+	}
+	
+	public void addRow(String name, String price, String qty) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		stmt = conn.createStatement();
+		String sql = "INSERT INTO " + TNAME + 
+				"(name, price, qty)" +
+				"VALUES ('" + name + "', " + price + ", " + qty + ");";
+		stmt.executeUpdate(sql);
+		try{
+			if(stmt!=null)
+				stmt.close();
+		}catch(SQLException se2){
+		}
+		try{
+			if(conn!=null)
+				conn.close();
+		}catch(SQLException se){
+			se.printStackTrace();
+		}
 	}
 	
 	public boolean checkDBExists(String dbName){

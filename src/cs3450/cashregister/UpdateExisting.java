@@ -27,7 +27,7 @@ public class UpdateExisting implements ActionListener{
 	
 	private InventoryScreen invScreen;
 	private UpdateProduct updProd;
-	private Driver driver = new Driver();
+	private Driver driver = new Driver("products");
 	private JFrame frame = new JFrame("Choose Existing Product");
 	private JPanel screen = new JPanel();
 	private JPanel id = new JPanel();
@@ -49,7 +49,7 @@ public class UpdateExisting implements ActionListener{
 		GridBagConstraints c = new GridBagConstraints();
 		screen.setPreferredSize(new Dimension(600, 400));
 		
-		table = new JTable(driver.getTableData("products"), driver.getColNames("products"));
+		table = new JTable(driver.getTableData(), driver.getColNames());
 		table.setPreferredScrollableViewportSize(new Dimension(500, 50));
 		table.setFillsViewportHeight(true);
 		
@@ -95,9 +95,12 @@ public class UpdateExisting implements ActionListener{
 		else if(tmp == submit)
 		{
 			try {
-				updProd = new UpdateProduct();
+				updProd = new UpdateProduct(new JTable(driver.selectRow(text.getText()), driver.getColNames()));
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
