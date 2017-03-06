@@ -20,13 +20,16 @@ public class PaymentScreen implements ActionListener {
 	
 	public PaymentScreen(){
 		credit.addActionListener(this);
+		debit.addActionListener(this);
+		cash.addActionListener(this);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
 		screen.setLayout(new GridLayout(2, 2));
 		pane.setPreferredSize(new Dimension(800, 500));
 		pane.setSize(50, 50);
 
-		screen.add(new JLabel(Float.toString(CheckoutScreen.total) + "is due."));
+		screen.add(new JLabel(Float.toString(CheckoutScreen.total) + " is due."));
 		screen.add(credit);
 		screen.add(debit);
 		screen.add(cash);
@@ -39,8 +42,14 @@ public class PaymentScreen implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		frame.dispose();
-		new CreditCardScreen();
+		if (e.getSource() == credit || e.getSource() == debit) {
+			frame.dispose();
+			new CreditCardScreen();
+		}
+		if (e.getSource() == cash){
+			frame.dispose();
+			new ReceiptScreen(); 
+		}
 	}
 
 }

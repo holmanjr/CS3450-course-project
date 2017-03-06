@@ -28,6 +28,7 @@ public class CreditCardScreen implements ActionListener {
 	
 	public CreditCardScreen(){
 		confirm.addActionListener(this);
+		cancel.addActionListener(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
 		screen.setLayout(new GridLayout(5, 5));
@@ -54,8 +55,14 @@ public class CreditCardScreen implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		frame.dispose();
-		new ReceiptScreen(eName.getText());
+		if(e.getSource() == confirm){
+			frame.dispose();
+			new ReceiptScreen();
+		}
+		if(e.getSource() == cancel){
+			frame.dispose();
+			new PaymentScreen();
+		}
 	}
 
 }

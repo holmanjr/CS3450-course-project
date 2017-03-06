@@ -25,6 +25,7 @@ public class CheckoutScreen implements ActionListener {
 	private JButton cancel = new JButton("Cancel");
 	public static float total = 0;
 	private DefaultTableModel model = new DefaultTableModel(); 
+	public static JTable table;
 
     void addRow(){
         Object newID = JOptionPane.showInputDialog(frame, "Enter ID");
@@ -50,12 +51,13 @@ public class CheckoutScreen implements ActionListener {
 		model.addColumn("Name");
 		model.addColumn("Price");
 		model.addColumn("Quantity");
-		JTable table = new JTable(model);
+		table = new JTable(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		pay.addActionListener(this);
 		addb.addActionListener(this);
 		startOver.addActionListener(this);
 		removeb.addActionListener(this);
+		cancel.addActionListener(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
 		screen.setLayout(new GridLayout(3, 3));
@@ -91,6 +93,10 @@ public class CheckoutScreen implements ActionListener {
 		}
 		if(e.getSource() == startOver){
 			clearAll();
+		}
+		if(e.getSource() == cancel){
+			frame.dispose();
+			new MainScreen();
 		}
 	}
 }
