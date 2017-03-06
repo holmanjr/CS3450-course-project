@@ -15,14 +15,15 @@ public class ReceiptScreen {
 	private JButton print = new JButton("Print");
 
 	
-	public ReceiptScreen(String name){
+	public ReceiptScreen(){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		screen.setLayout(new GridLayout(2, 1));
+		screen.setLayout(new GridLayout(3, 1));
 		pane.setPreferredSize(new Dimension(800, 500));
 		pane.setSize(50, 50);
 		
-		screen.add(new JLabel(name + ", your total is: " + Float.toString(CheckoutScreen.total)));
+		screen.add(CheckoutScreen.table);
+		screen.add(new JLabel("Your total is: $" + Float.toString(CheckoutScreen.total)));
 		screen.add(print); 
 		
 		pane.add(screen);

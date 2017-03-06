@@ -20,13 +20,14 @@ public class MainScreen implements ActionListener {
 	public MainScreen(){
 		checkout.addActionListener(this);
 		inventory.addActionListener(this);
+		checkout.setPreferredSize(new Dimension(300, 150));
+		inventory.setPreferredSize(new Dimension(300, 150));
+
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		pane.setPreferredSize(new Dimension(800, 500));
-		pane.setSize(50, 50);
-		screen.setLayout(new GridLayout());
-		
+	   
+		screen.setLayout(new GridLayout(1, 2, 20, 50));		
 		screen.add(checkout);
 		screen.add(inventory);
 		pane.add(screen);
