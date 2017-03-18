@@ -137,7 +137,7 @@ public class Driver {
 		return tableData;
 	}
 	
-	public Vector<Vector<Object>> selectRow(String id) throws SQLException{
+	public ResultSet selectRow(String id) throws SQLException{
 		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		stmt = conn.createStatement();
 		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
@@ -149,11 +149,11 @@ public class Driver {
 		if(rs.next()){
 			Vector<Object> row = new Vector<Object>();
 			for(int i = 1; i <= colCount; i++){
-			row.add(rs.getObject(i));
+				row.add(rs.getObject(i));
 			}
 			data.add(row);
 		}
-		return data;
+		return rs;
 	}
 	
 	public void addRow(String name, String price, String qty) throws SQLException{
@@ -174,6 +174,18 @@ public class Driver {
 		}catch(SQLException se){
 			se.printStackTrace();
 		}
+	}
+	
+	public void updateRow(Integer id, String name, Double price, Integer qty) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		PreparedStatement pst = conn.prepareStatement
+				("UPDATE " + TNAME + " SET name=?, price=?, qty=? WHERE prodid=?");
+		pst.setString(1, name);
+		pst.setDouble(2, price);	
+		pst.setInt(3, qty);
+		pst.setInt(4, id);
+		
+		pst.executeUpdate();
 	}
 	
 	public boolean checkDBExists(String dbName){

@@ -27,6 +27,7 @@ import javax.swing.SwingUtilities;
  */
 public class NewProduct implements ActionListener{
 	
+	private JFrame frame = new JFrame("Add New Product");
 	private InventoryScreen invScreen;
 	private Driver driver = new Driver("products");
 	private JPanel lblPanel = new JPanel();
@@ -37,7 +38,6 @@ public class NewProduct implements ActionListener{
 	private JTextField nameTxtFld = new JTextField(10);
 	private JTextField priceTxtFld = new JTextField(10);
 	private JTextField qtyTxtFld = new JTextField(10);
-	private JFrame frame = new JFrame("Add New Product");
 	private JPanel screen = new JPanel();
 	private JButton save = new JButton("Save");
 	private JButton back = new JButton("Back");
@@ -67,10 +67,11 @@ public class NewProduct implements ActionListener{
 		
 		pane.add(screen);
 		
-		c.insets = new Insets(5, 5, 5, 5);
+		c.insets = new Insets(0, 5, 0, 5);
 		c.gridx = 0;
 		c.gridy = 0;
 		screen.add(lblPanel, c);
+		c.insets = new Insets(5, 5, 5, 5);
 		c.gridy ++;
 		screen.add(txtPanel, c);
 		c.gridy ++;

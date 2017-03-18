@@ -95,7 +95,7 @@ public class UpdateExisting implements ActionListener{
 		else if(tmp == submit)
 		{
 			try {
-				updProd = new UpdateProduct(new JTable(driver.selectRow(text.getText()), driver.getColNames()));
+				updProd = new UpdateProduct(driver.selectRow(text.getText()));
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
