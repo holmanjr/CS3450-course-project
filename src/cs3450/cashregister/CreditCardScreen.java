@@ -24,6 +24,8 @@ public class CreditCardScreen implements ActionListener {
 	private JTextField eNum = new JTextField();
 	private JTextField eDate = new JTextField();
 	private JTextField eCCV = new JTextField();
+	
+	//changed...k
 
 	
 	public CreditCardScreen(){
