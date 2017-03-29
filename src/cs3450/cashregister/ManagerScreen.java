@@ -92,7 +92,8 @@ public class ManagerScreen {
 		logoutBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "This funtionality has not been implemented yet!");
+				frame.dispose();
+				new LoginScreen();
 			}
 		});
 		bottomPanel.add(logoutBtn, BorderLayout.EAST);

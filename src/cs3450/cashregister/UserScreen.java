@@ -52,7 +52,7 @@ public class UserScreen {
 		pictPanel.add(pictTxtFld, BorderLayout.EAST);
 		screen.add(pictPanel);
 		
-		JPanel btnLabel = new JPanel();
+		JPanel btnPanel = new JPanel();
 		saveBtn.setPreferredSize(new Dimension(100, 25));
 		saveBtn.addActionListener(new ActionListener() {
 			@Override
@@ -60,7 +60,7 @@ public class UserScreen {
 				JOptionPane.showMessageDialog(frame, "This functionality is not implemented yet!");
 			}
 		});
-		btnLabel.add(saveBtn);
+		btnPanel.add(saveBtn);
 		cancelBtn.setPreferredSize(new Dimension(100, 25));
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
@@ -69,8 +69,8 @@ public class UserScreen {
 				new ManagerScreen();
 			}
 		});
-		btnLabel.add(cancelBtn);
-		screen.add(btnLabel);
+		btnPanel.add(cancelBtn);
+		screen.add(btnPanel);
 		
 		pane.add(screen);
 		
