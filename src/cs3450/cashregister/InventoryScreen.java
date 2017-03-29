@@ -114,7 +114,7 @@ public class InventoryScreen implements ActionListener{
 			}
 		}
 		else if(tmp == back){
-			new MainScreen();
+			new ManagerScreen();
 			frame.dispose();
 		}
 	}
