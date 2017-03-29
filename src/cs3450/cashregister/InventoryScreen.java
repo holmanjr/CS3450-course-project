@@ -69,23 +69,6 @@ public class InventoryScreen implements ActionListener{
 		frame.setVisible(true);
 	}
 
-	/**
-	 * @param args
-	 * Temporary main method for testing
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-
-			@Override
-			public void run() {
-				try {
-					new InventoryScreen();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}				
-			}});
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton tmp = (JButton)e.getSource();

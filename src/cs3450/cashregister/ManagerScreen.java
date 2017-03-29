@@ -80,7 +80,8 @@ public class ManagerScreen {
 		empBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "This funtionality has not been implemented yet!");
+				frame.dispose();
+				new EmpManScreen();
 			}
 		});
 		panel.add(empBtn);
@@ -104,18 +105,6 @@ public class ManagerScreen {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable(){
-
-			@Override
-			public void run() {
-				new ManagerScreen();				
-			}});
 	}
 
 }

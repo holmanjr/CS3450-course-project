@@ -39,7 +39,7 @@ public class LoginScreen {
 		screen.add(msgLbl);
 		
 		JPanel btnPanel = new JPanel();
-		mngrBtn.setPreferredSize(new Dimension(100, 100));
+		mngrBtn.setPreferredSize(new Dimension(200, 100));
 		mngrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -48,7 +48,7 @@ public class LoginScreen {
 			}
 		});
 		btnPanel.add(mngrBtn);
-		cshrBtn.setPreferredSize(new Dimension(100, 100));
+		cshrBtn.setPreferredSize(new Dimension(200, 100));
 		cshrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
