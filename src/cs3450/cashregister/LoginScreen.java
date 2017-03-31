@@ -52,7 +52,8 @@ public class LoginScreen {
 		cshrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "This functionality is not implemented yet!");
+				frame.dispose();
+				new CashierScreen();
 			}
 		});
 		btnPanel.add(cshrBtn);
