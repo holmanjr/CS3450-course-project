@@ -1,5 +1,6 @@
 package cs3450.cashregister;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,8 +19,8 @@ public class CheckoutScreen implements ActionListener {
 
 	private JFrame frame = new JFrame("Checkout");
 	private JPanel screen = new JPanel();
-	private JButton addb = new JButton("Add");
-	private JButton removeb = new JButton("Remove");
+	private JButton addb = new JButton("Add                     ");
+	private JButton removeb = new JButton("Remove                    ");
 	private JButton pay = new JButton("Pay");
 	private JButton startOver = new JButton("Start Over");
 	private JButton cancel = new JButton("Cancel");
@@ -56,7 +57,7 @@ public class CheckoutScreen implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		screen.setLayout(new GridLayout(3, 3));
+		screen.setLayout(new BorderLayout());
 		pane.setPreferredSize(new Dimension(800, 500));
 		pane.setSize(50, 50);
 		
@@ -68,12 +69,12 @@ public class CheckoutScreen implements ActionListener {
 		cancel.addActionListener(this);
 		
 		//Add buttons
-		screen.add(scrollPane);
-		screen.add(addb);
-		screen.add(removeb);
-		screen.add(pay);
-		screen.add(startOver);
-		screen.add(cancel); 
+		screen.add(scrollPane, BorderLayout.PAGE_START);
+		screen.add(addb, BorderLayout.WEST);
+		screen.add(removeb, BorderLayout.EAST);
+		screen.add(pay, BorderLayout.CENTER);
+		screen.add(cancel, BorderLayout.PAGE_END); 
+
 		
 		//more screen layout
 		pane.add(screen);

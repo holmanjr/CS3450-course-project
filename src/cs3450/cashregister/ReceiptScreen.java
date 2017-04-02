@@ -1,6 +1,7 @@
 package cs3450.cashregister;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -18,12 +19,14 @@ public class ReceiptScreen {
 	public ReceiptScreen(){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		screen.setLayout(new GridLayout(3, 1));
-		pane.setPreferredSize(new Dimension(800, 500));
-		pane.setSize(50, 50);
+		screen.setLayout(new FlowLayout());
 		
+		//buttons
 		screen.add(CheckoutScreen.table);
-		screen.add(new JLabel("Your total is: $" + Float.toString(CheckoutScreen.total)));
+		JLabel total = new JLabel("Your total is: $" + Float.toString(CheckoutScreen.total));
+		total.setPreferredSize(new Dimension(200, 100));
+		print.setPreferredSize(new Dimension(200, 100));
+		screen.add(total);
 		screen.add(print); 
 		
 		pane.add(screen);
