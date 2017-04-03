@@ -2,6 +2,7 @@ package cs3450.cashregister.Databases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -185,6 +186,15 @@ public class EmpDriver {
 			se.printStackTrace();
 		}
 		return headers;
+	}
+	
+	public void deleteEmployee(Integer id) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		PreparedStatement pst = conn.prepareStatement
+				("DELETE FROM " + TNAME + " WHERE empid=?");
+		pst.setInt(1, id);
+		
+		pst.executeUpdate();
 	}
 
 }

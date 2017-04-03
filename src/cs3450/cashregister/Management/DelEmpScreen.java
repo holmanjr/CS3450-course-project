@@ -53,7 +53,17 @@ public class DelEmpScreen {
 		delBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "To be implemented");
+				try {
+					driver.deleteEmployee(Integer.parseInt(idTxtFld.getText()));
+					new DelEmpScreen();
+					frame.dispose();
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnPanel.add(delBtn);
