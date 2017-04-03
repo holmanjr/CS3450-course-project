@@ -27,7 +27,7 @@ public class UpdateExisting implements ActionListener{
 	
 	private InventoryScreen invScreen;
 	private UpdateProduct updProd;
-	private Driver driver = new Driver("products");
+	private ProdDriver driver = new ProdDriver("products");
 	private JFrame frame = new JFrame("Choose Existing Product");
 	private JPanel screen = new JPanel();
 	private JPanel id = new JPanel();

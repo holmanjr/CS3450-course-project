@@ -29,7 +29,7 @@ public class NewProduct implements ActionListener{
 	
 	private JFrame frame = new JFrame("Add New Product");
 	private InventoryScreen invScreen;
-	private Driver driver = new Driver("products");
+	private ProdDriver driver = new ProdDriver("products");
 	private JPanel lblPanel = new JPanel();
 	private JLabel nameLbl = new JLabel("Name", SwingConstants.CENTER);
 	private JLabel priceLbl = new JLabel("Price", SwingConstants.CENTER);

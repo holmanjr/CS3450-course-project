@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-public class Driver {
+public class ProdDriver {
 	private final String DBURL = "jdbc:mysql://localhost:3306/";
 	private final String USER = "root";
 	private final String PASS = "root";
@@ -21,7 +21,7 @@ public class Driver {
 	private Vector<String> headers;
 	private Vector<Vector<Object>> tableData;
 	
-	public Driver(String tName){
+	public ProdDriver(String tName){
 		TNAME = tName;
 		try{
 			conn = DriverManager.getConnection(DBURL + WARNSUP, USER, PASS);

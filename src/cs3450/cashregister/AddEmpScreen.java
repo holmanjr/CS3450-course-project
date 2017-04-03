@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,6 +24,7 @@ import javax.swing.JTextField;
  */
 public class AddEmpScreen {
 	
+	private EmpDriver driver = new EmpDriver();
 	private JFrame frame = new JFrame("Add New Employee");
 	private JPanel screen = new JPanel();
 	private JLabel usrNmLbl, codeLbl, picLbl, posLbl;
@@ -73,11 +76,24 @@ public class AddEmpScreen {
 		saveBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "This functionality is not implemented yet!");
+				if(!usrNmTxtFld.getText().isEmpty() && !codeTxtFld.getText().isEmpty() 
+						&& !picTxtFld.getText().isEmpty() && !posTxtFld.getText().isEmpty()){
+					try {
+						driver.addEmployee(usrNmTxtFld.getText(), codeTxtFld.getText(), 
+								picTxtFld.getText(), posTxtFld.getText());
+						JOptionPane.showMessageDialog(null, "Employee successfully added!");
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "All values need to be inserted");
+				}
 			}
 		});
 		btnPanel.add(saveBtn);
-		cancelBtn = new JButton("Cancel");
+		cancelBtn = new JButton("Back");
 		cancelBtn.setPreferredSize(new Dimension(100, 25));
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override

@@ -24,7 +24,7 @@ import javax.swing.SwingConstants;
  */
 public class UpdateProduct implements ActionListener{
 	
-	Driver driver = new Driver("products");
+	ProdDriver driver = new ProdDriver("products");
 	private JFrame frame = new JFrame("Update Existing Product");
 	private JPanel lblPanel = new JPanel();
 	private JLabel nameLbl = new JLabel("Name", SwingConstants.CENTER);
