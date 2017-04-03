@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +28,9 @@ public class LoginScreen {
 	private JLabel msgLbl = new JLabel("To be implemented...");
 	private JButton mngrBtn = new JButton("Manager");
 	private JButton cshrBtn = new JButton("Cashier");
+	
+	//Array of images that represent employees
+	private ImageIcon avatars = new ImageIcon();
 	
 	public LoginScreen(){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,7 +56,8 @@ public class LoginScreen {
 		cshrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(frame, "This functionality is not implemented yet!");
+				frame.dispose();
+				new CashierScreen();
 			}
 		});
 		btnPanel.add(cshrBtn);
