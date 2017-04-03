@@ -196,5 +196,24 @@ public class EmpDriver {
 		
 		pst.executeUpdate();
 	}
+	
+	public ResultSet selectEmployee(String id) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		stmt = conn.createStatement();
+		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		PreparedStatement pst = conn.prepareStatement("SELECT * FROM " + TNAME +
+				" WHERE empid = ?"); 
+		pst.setString(1, id);
+		ResultSet rs = pst.executeQuery();
+		colCount = rs.getMetaData().getColumnCount();
+		if(rs.next()){
+			Vector<Object> row = new Vector<Object>();
+			for(int i = 1; i <= colCount; i++){
+				row.add(rs.getObject(i));
+			}
+			data.add(row);
+		}
+		return rs;
+	}
 
 }
