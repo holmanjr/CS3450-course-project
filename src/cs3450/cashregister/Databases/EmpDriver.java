@@ -215,5 +215,17 @@ public class EmpDriver {
 		}
 		return rs;
 	}
+	
+	public void updateEmployee(Integer id, String username, String code, String imageURL) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		PreparedStatement pst = conn.prepareStatement
+				("UPDATE " + TNAME + " SET username=?, code=?, imageURL=? WHERE empid=?");
+		pst.setString(1, username);
+		pst.setString(2, code);	
+		pst.setString(3, imageURL);
+		pst.setInt(4, id);
+		
+		pst.executeUpdate();
+	}
 
 }
