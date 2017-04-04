@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import cs3450.cashregister.Databases.EmpDriver;
+import cs3450.cashregister.Databases.Employee;
 
 public class DelEmpScreen {
 	
@@ -29,7 +30,7 @@ public class DelEmpScreen {
 	private JButton delBtn = new JButton("Delete");
 	private JButton finBtn = new JButton("Finished");
 	
-	public DelEmpScreen() throws SQLException{
+	public DelEmpScreen(Employee emp) throws SQLException{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -55,7 +56,7 @@ public class DelEmpScreen {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					driver.deleteEmployee(Integer.parseInt(idTxtFld.getText()));
-					new DelEmpScreen();
+					new DelEmpScreen(emp);
 					frame.dispose();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -71,7 +72,7 @@ public class DelEmpScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new EmpManScreen();
+				new EmpManScreen(emp);
 			}
 		});
 		btnPanel.add(finBtn);

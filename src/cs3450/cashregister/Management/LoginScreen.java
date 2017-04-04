@@ -39,22 +39,13 @@ public class LoginScreen {
 	private JPanel screen = new JPanel();
 	private JLabel msgLbl = new JLabel("To be implemented...");
 	private JButton mngrBtn = new JButton("Manager");
-//	private URL url;
-//	private Image image;
-//	private ImageIcon imgIcon;
 	private JButton cshrBtn = new JButton("Cashier");
+	private Employee manager, cashier;
 	
 	//Array of images that represent employees
 	private ImageIcon avatars = new ImageIcon();
 	
 	public LoginScreen() throws IOException, SQLException{
-//		url = new URL("http://icons.iconarchive.com/icons/hopstarter/sleek-xp-software/256/Yahoo-Messenger-icon.png");
-//		image = ImageIO.read(url);
-//		Image img = image.getScaledInstance(200, 100, Image.SCALE_SMOOTH);
-//		imgIcon = new ImageIcon(img);
-//		cshrBtn = new JButton(imgIcon);
-		
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -64,13 +55,18 @@ public class LoginScreen {
 		msgLbl.setFont(new Font("Serif", Font.BOLD, 26));
 		screen.add(msgLbl);
 		
+		manager = new Employee();
+		cashier = new Employee();
+		cashier.setUsername("cashier");
+		cashier.setStatus(false);
+		
 		JPanel btnPanel = new JPanel();
 		mngrBtn.setPreferredSize(new Dimension(200, 100));
 		mngrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new ManagerScreen();
+				new ManagerScreen(manager);
 			}
 		});
 		btnPanel.add(mngrBtn);
@@ -79,7 +75,7 @@ public class LoginScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new CashierScreen();
+				new CashierScreen(cashier);
 			}
 		});
 		btnPanel.add(cshrBtn);
@@ -112,7 +108,7 @@ public class LoginScreen {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					frame.dispose();
-					new ManagerScreen();
+					new ManagerScreen(emp);
 				}
 			});
 		}
@@ -121,7 +117,7 @@ public class LoginScreen {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					frame.dispose();
-					new CashierScreen();
+					new CashierScreen(cashier);
 				}
 			});
 		}

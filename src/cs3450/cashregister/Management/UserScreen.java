@@ -14,20 +14,23 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import cs3450.cashregister.Checkout.CashierScreen;
+import cs3450.cashregister.Databases.Employee;
+
 public class UserScreen {
 	
 	private JFrame frame = new JFrame("User Settings");
 	private JPanel screen = new JPanel();
 	private JLabel usrnmLbl = new JLabel("New Username: ");
 	private JLabel codeLbl = new JLabel("New Code: ");
-	private JLabel pictLbl = new JLabel("Enter New Picture URL/Filepath: ");
+	private JLabel pictLbl = new JLabel("Enter New Picture URL: ");
 	private JTextField usrnmTxtFld = new JTextField(15);
 	private JTextField codeTxtFld = new JTextField(15);
 	private JTextField pictTxtFld = new JTextField(15);
 	private JButton saveBtn = new JButton("Save");
 	private JButton cancelBtn = new JButton("Cancel");
 	
-	public UserScreen(){
+	public UserScreen(Employee emp){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -65,8 +68,14 @@ public class UserScreen {
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				new ManagerScreen();
+				if(emp.isManager()){
+					frame.dispose();
+					new ManagerScreen(emp);
+				}
+				else{
+					frame.dispose();
+					new CashierScreen(emp);
+				}
 			}
 		});
 		btnPanel.add(cancelBtn);

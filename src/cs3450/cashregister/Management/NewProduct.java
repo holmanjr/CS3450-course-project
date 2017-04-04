@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import cs3450.cashregister.Databases.Employee;
 import cs3450.cashregister.Databases.ProdDriver;
 
 /**
@@ -43,9 +44,12 @@ public class NewProduct implements ActionListener{
 	private JPanel screen = new JPanel();
 	private JButton save = new JButton("Save");
 	private JButton back = new JButton("Back");
+	private Employee emp;
 	
-	public NewProduct() throws FileNotFoundException
+	public NewProduct(Employee emp) throws FileNotFoundException
 	{
+		this.emp = emp;
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -98,7 +102,7 @@ public class NewProduct implements ActionListener{
 			if(!nameTxtFld.getText().isEmpty() && !priceTxtFld.getText().isEmpty() && !qtyTxtFld.getText().isEmpty()){
 				try {
 					driver.addRow(nameTxtFld.getText(), priceTxtFld.getText(), qtyTxtFld.getText());
-					new UpdateExisting();
+					new UpdateExisting(emp);
 					frame.dispose();
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -115,7 +119,7 @@ public class NewProduct implements ActionListener{
 		else if(tmp == back)
 		{
 			try {
-				invScreen = new InventoryScreen();
+				invScreen = new InventoryScreen(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block

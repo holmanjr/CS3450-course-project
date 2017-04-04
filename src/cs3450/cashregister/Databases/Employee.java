@@ -15,6 +15,14 @@ public class Employee {
 	private String imageURL;
 	private boolean status;
 	
+	public Employee(){
+		this.id = 100;
+		this.username = "admin";
+		this.code = "";
+		this.imageURL = "";
+		this.status = true;
+	}
+	
 	public Employee(Vector<Object> row) throws NumberFormatException, SQLException{
 		this.id = (Integer) row.get(0);
 		this.username = (String) row.get(1);

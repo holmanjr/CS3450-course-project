@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cs3450.cashregister.Databases.Employee;
+
 public class CreditCardScreen implements ActionListener {
 	private JFrame frame = new JFrame("Payment Information");
 	private JPanel screen = new JPanel();
@@ -24,11 +26,14 @@ public class CreditCardScreen implements ActionListener {
 	private JTextField eNum = new JTextField();
 	private JTextField eDate = new JTextField();
 	private JTextField eCCV = new JTextField();
+	private Employee cashier;
 	
 	//changed...k
 
 	
-	public CreditCardScreen(){
+	public CreditCardScreen(Employee cashier){
+		this.cashier = cashier;
+		
 		confirm.addActionListener(this);
 		cancel.addActionListener(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
@@ -63,7 +68,7 @@ public class CreditCardScreen implements ActionListener {
 		}
 		if(e.getSource() == cancel){
 			frame.dispose();
-			new PaymentScreen();
+			new PaymentScreen(cashier);
 		}
 	}
 

@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import cs3450.cashregister.Databases.EmpDriver;
+import cs3450.cashregister.Databases.Employee;
 
 /**
  * @author Jason Holman Boden Archuleta
@@ -33,7 +34,7 @@ public class AddEmpScreen {
 	private JTextField usrNmTxtFld, codeTxtFld, picTxtFld, posTxtFld;
 	private JButton saveBtn, cancelBtn;
 	
-	public AddEmpScreen(){
+	public AddEmpScreen(Employee emp){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -58,7 +59,7 @@ public class AddEmpScreen {
 		
 		JPanel picPanel = new JPanel();
 		picPanel.setLayout(new BorderLayout());
-		picLbl = new JLabel("Picture URL/Filepath: ");
+		picLbl = new JLabel("Picture URL: ");
 		picPanel.add(picLbl, BorderLayout.WEST);
 		picTxtFld = new JTextField(15);
 		picPanel.add(picTxtFld, BorderLayout.EAST);
@@ -101,7 +102,7 @@ public class AddEmpScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new EmpManScreen();
+				new EmpManScreen(emp);
 			}
 		});
 		btnPanel.add(cancelBtn);

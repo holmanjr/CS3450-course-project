@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import cs3450.cashregister.Databases.Employee;
+
 public class CheckoutScreen implements ActionListener {
 
 	private JFrame frame = new JFrame("Checkout");
@@ -27,6 +29,7 @@ public class CheckoutScreen implements ActionListener {
 	public static float total = 0;
 	private DefaultTableModel model = new DefaultTableModel(); 
 	public static JTable table;
+	public Employee cashier;
 
     void addRow(){
         Object newID = JOptionPane.showInputDialog(frame, "Enter ID");
@@ -47,7 +50,10 @@ public class CheckoutScreen implements ActionListener {
     	}
     }
 	
-	public CheckoutScreen(){
+	public CheckoutScreen(Employee cashier){
+		// creating cashier employee to pass
+		this.cashier = cashier;
+		
 		//screen layout 
 		model.addColumn("ID");
 		model.addColumn("Name");
@@ -91,7 +97,7 @@ public class CheckoutScreen implements ActionListener {
 		}
 		if (e.getSource() == pay) {
 			frame.dispose();
-			new PaymentScreen();
+			new PaymentScreen(cashier);
 		}
 		if(e.getSource() == removeb){
 			removeRow();
@@ -101,7 +107,7 @@ public class CheckoutScreen implements ActionListener {
 		}
 		if(e.getSource() == cancel){
 			frame.dispose();
-			new CashierScreen();
+			new CashierScreen(cashier);
 		}
 	}
 }

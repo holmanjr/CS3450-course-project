@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import cs3450.cashregister.Databases.Employee;
+
 public class ReturnScreen implements ActionListener{
 	
 	private JButton search = new JButton("Search");
@@ -21,8 +23,12 @@ public class ReturnScreen implements ActionListener{
 	private JFrame frame = new JFrame("Cashier");
 	private JPanel upperScreen = new JPanel();
 	private JPanel lowerScreen = new JPanel();
+	private Employee cashier;
 	
-	ReturnScreen(){
+	ReturnScreen(Employee cashier){
+		//creating cashier employee to pass
+		this.cashier = cashier;
+		
 		//page layout 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -58,7 +64,7 @@ public class ReturnScreen implements ActionListener{
 		}
 		if(e.getSource() == cancel){
 			frame.dispose();
-			new CashierScreen();
+			new CashierScreen(cashier);
 		}
 	}
 

@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import cs3450.cashregister.Checkout.CheckoutScreen;
 
-public class MainScreen implements ActionListener {
+public class MainScreen /*implements ActionListener*/ {
 	
 	private JFrame frame = new JFrame("Inventory Management");
 	private JPanel screen = new JPanel();
@@ -20,8 +20,8 @@ public class MainScreen implements ActionListener {
 	private JButton inventory = new JButton("Edit Inventory");
 
 	public MainScreen(){
-		checkout.addActionListener(this);
-		inventory.addActionListener(this);
+//		checkout.addActionListener(this);
+//		inventory.addActionListener(this);
 		checkout.setPreferredSize(new Dimension(300, 150));
 		inventory.setPreferredSize(new Dimension(300, 150));
 
@@ -39,21 +39,21 @@ public class MainScreen implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		JButton tmp = (JButton)arg0.getSource();
-		if(tmp == checkout){
-			frame.dispose();
-	        new CheckoutScreen();
-		}
-		else if(tmp == inventory){
-			frame.dispose();
-			try {
-				new InventoryScreen();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent arg0) {
+//		JButton tmp = (JButton)arg0.getSource();
+//		if(tmp == checkout){
+//			frame.dispose();
+//	        new CheckoutScreen();
+//		}
+//		else if(tmp == inventory){
+//			frame.dispose();
+//			try {
+//				new InventoryScreen();
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//	}
 }
 

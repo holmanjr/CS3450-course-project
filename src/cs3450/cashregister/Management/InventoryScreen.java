@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import cs3450.cashregister.Databases.Employee;
+
 /**
  * @author Jason Holman, Boden Archuleta
  * @version 1.0
@@ -28,12 +30,16 @@ public class InventoryScreen implements ActionListener{
 	private JButton update = new JButton("Update existing");
 	private JButton addNew = new JButton("Add new product");
 	private JButton back = new JButton("Back");
+	private Employee emp;
 	
 	/**
 	 *  Constructor to display the inventory screen
+	 * @param emp 
 	 */
-	public InventoryScreen() throws FileNotFoundException
+	public InventoryScreen(Employee emp) throws FileNotFoundException
 	{
+		this.emp = emp;
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -75,7 +81,7 @@ public class InventoryScreen implements ActionListener{
 		if(tmp == update)
 		{
 			try {
-				updateScreen = new UpdateExisting();
+				updateScreen = new UpdateExisting(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -89,7 +95,7 @@ public class InventoryScreen implements ActionListener{
 		else if(tmp == addNew)
 		{
 			try {
-				newProd = new NewProduct();
+				newProd = new NewProduct(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -97,7 +103,7 @@ public class InventoryScreen implements ActionListener{
 			}
 		}
 		else if(tmp == back){
-			new ManagerScreen();
+			new ManagerScreen(emp);
 			frame.dispose();
 		}
 	}

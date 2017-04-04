@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import cs3450.cashregister.Databases.Employee;
+
 /**
  * @author Jason
  *
@@ -27,7 +29,7 @@ public class EmpManScreen {
 	private JButton delEmpBtn = new JButton("Delete Employee");
 	private JButton backBtn = new JButton("Back");
 	
-	public EmpManScreen(){
+	public EmpManScreen(Employee emp){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -41,7 +43,7 @@ public class EmpManScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new AddEmpScreen();
+				new AddEmpScreen(emp);
 			}
 		});
 		btnPanel.add(addEmpBtn);
@@ -51,7 +53,7 @@ public class EmpManScreen {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				try {
-					new DelEmpScreen();
+					new DelEmpScreen(emp);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -67,7 +69,7 @@ public class EmpManScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new ManagerScreen();
+				new ManagerScreen(emp);
 			}
 		});
 		bottomPanel.add(backBtn, BorderLayout.EAST);

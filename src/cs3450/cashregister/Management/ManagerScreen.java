@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import cs3450.cashregister.Databases.Employee;
+
 /**
  * @author Jason Holman Boden Archuleta
  * @version 2.0
@@ -33,7 +35,7 @@ public class ManagerScreen {
 	private JButton empBtn = new JButton("Manage Empoyees");
 	private JButton logoutBtn = new JButton("Logout");
 	
-	public ManagerScreen(){
+	public ManagerScreen(Employee emp){
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -58,7 +60,7 @@ public class ManagerScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new UserScreen();
+				new UserScreen(emp);
 			}
 		});
 		panel.add(usrSttngsBtn);
@@ -69,7 +71,7 @@ public class ManagerScreen {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 				try {
-					new InventoryScreen();
+					new InventoryScreen(emp);
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -83,7 +85,7 @@ public class ManagerScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new EmpManScreen();
+				new EmpManScreen(emp);
 			}
 		});
 		panel.add(empBtn);

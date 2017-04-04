@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cs3450.cashregister.Databases.Employee;
 import cs3450.cashregister.Management.LoginScreen;
 import cs3450.cashregister.Management.UserScreen;
 
@@ -26,8 +27,12 @@ public class CashierScreen implements ActionListener{
 	private JButton COButton = new JButton("Checkout");
 	private JButton RButton = new JButton("Return an Item");
 	private JButton logout = new JButton("Logout");
+	private Employee cashier;
 	
-	public CashierScreen(){
+	public CashierScreen(Employee cashier){
+		//creating cashier employee to pass to user screen
+		this.cashier = cashier;
+				
 		//page layout 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -67,15 +72,15 @@ public class CashierScreen implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == usrButton){
 			frame.dispose();
-			new UserScreen();
+			new UserScreen(cashier);
 		}
 		if(e.getSource() == RButton){
 			frame.dispose();
-			new ReturnScreen();
+			new ReturnScreen(cashier);
 		}
 		if(e.getSource() == COButton){
 			frame.dispose();
-			new CheckoutScreen();
+			new CheckoutScreen(cashier);
 		}
 		if(e.getSource() == logout){
 			frame.dispose();

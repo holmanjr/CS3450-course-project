@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import cs3450.cashregister.Databases.Employee;
+
 public class PaymentScreen implements ActionListener {
 	
 	private JFrame frame = new JFrame("Select a payment type");
@@ -20,8 +22,12 @@ public class PaymentScreen implements ActionListener {
 	private JButton debit = new JButton("Debit");
 	private JButton cash = new JButton("Cash");
 	private JButton cancel = new JButton("Cancel");
+	private Employee cashier;
 	
-	public PaymentScreen(){
+	public PaymentScreen(Employee cashier){
+		//creating cashier employee to pass
+		this.cashier = cashier;
+		
 		//set up page
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
@@ -54,7 +60,7 @@ public class PaymentScreen implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == credit || e.getSource() == debit) {
 			frame.dispose();
-			new CreditCardScreen();
+			new CreditCardScreen(cashier);
 		}
 		if (e.getSource() == cash){
 			frame.dispose();
