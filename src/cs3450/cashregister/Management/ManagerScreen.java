@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -94,7 +96,15 @@ public class ManagerScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new LoginScreen();
+				try {
+					new LoginScreen();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		bottomPanel.add(logoutBtn, BorderLayout.EAST);
