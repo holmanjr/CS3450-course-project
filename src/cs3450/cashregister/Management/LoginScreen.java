@@ -117,7 +117,7 @@ public class LoginScreen {
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					frame.dispose();
-					new CashierScreen(cashier);
+					new CashierScreen(emp);
 				}
 			});
 		}

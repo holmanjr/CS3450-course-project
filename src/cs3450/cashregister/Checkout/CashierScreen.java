@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import cs3450.cashregister.Databases.Employee;
@@ -32,6 +33,7 @@ public class CashierScreen implements ActionListener{
 	public CashierScreen(Employee cashier){
 		//creating cashier employee to pass to user screen
 		this.cashier = cashier;
+		title = new JLabel("User: " + cashier.getUsername());
 				
 		//page layout 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,8 +73,13 @@ public class CashierScreen implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == usrButton){
-			frame.dispose();
-			new UserScreen(cashier);
+			if(cashier.getUsername().equals("cashier")){
+				JOptionPane.showMessageDialog(null, "User settings not available for this user");
+			}
+			else{
+				frame.dispose();
+				new UserScreen(cashier);
+			}
 		}
 		if(e.getSource() == RButton){
 			frame.dispose();

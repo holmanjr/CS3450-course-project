@@ -29,7 +29,7 @@ public class ManagerScreen {
 	
 	private JFrame frame = new JFrame("Manager Screen");
 	private JPanel screen = new JPanel();
-	private JLabel title = new JLabel("Management Options");
+	private JLabel title;
 	private JButton usrSttngsBtn = new JButton("User Settings");
 	private JButton invBtn = new JButton("Manage Inventory");
 	private JButton empBtn = new JButton("Manage Empoyees");
@@ -45,6 +45,7 @@ public class ManagerScreen {
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
 		
+		title = new JLabel("User: " + emp.getUsername());
 		title.setFont(new Font("Serif", Font.BOLD, 26));
 		title.setMaximumSize(new Dimension(Integer.MAX_VALUE, title.getMinimumSize().height));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -59,8 +60,13 @@ public class ManagerScreen {
 		usrSttngsBtn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				new UserScreen(emp);
+				if(emp.getUsername().equals("admin")){
+					JOptionPane.showMessageDialog(null, "User Settings not available for this user");
+				}
+				else{
+					frame.dispose();
+					new UserScreen(emp);
+				}
 			}
 		});
 		panel.add(usrSttngsBtn);
