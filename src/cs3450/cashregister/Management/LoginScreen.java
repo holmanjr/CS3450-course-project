@@ -1,5 +1,6 @@
 package cs3450.cashregister.Management;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -20,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Checkout.CashierScreen;
@@ -35,7 +37,7 @@ public class LoginScreen {
 	private EmpDriver driver = new EmpDriver();
 	private JFrame frame = new JFrame("Cash Register System");
 	private JPanel screen = new JPanel();
-	private JLabel msgLbl = new JLabel("To be implemented...");
+	private JLabel msgLbl = new JLabel("Click your Image to Login");
 	private JButton mngrBtn = new JButton("Manager");
 	private JButton cshrBtn = new JButton("Cashier");
 	private Employee manager, cashier;
@@ -50,8 +52,12 @@ public class LoginScreen {
 		
 		screen.setLayout(new BoxLayout(screen, BoxLayout.Y_AXIS));
 		
-		msgLbl.setFont(new Font("Serif", Font.BOLD, 26));
-		screen.add(msgLbl);
+		JPanel titlePanel = new JPanel();
+		titlePanel.setLayout(new BorderLayout());
+		msgLbl.setFont(new Font("Serif", Font.BOLD, 22));
+		msgLbl.setHorizontalAlignment(SwingConstants.CENTER);
+		titlePanel.add(msgLbl);
+		screen.add(titlePanel);
 		
 		manager = new Employee();
 		cashier = new Employee();
@@ -59,7 +65,7 @@ public class LoginScreen {
 		cashier.setStatus(false);
 		
 		JPanel btnPanel = new JPanel();
-		mngrBtn.setPreferredSize(new Dimension(200, 100));
+		mngrBtn.setPreferredSize(new Dimension(150, 75));
 		mngrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -68,7 +74,7 @@ public class LoginScreen {
 			}
 		});
 		btnPanel.add(mngrBtn);
-		cshrBtn.setPreferredSize(new Dimension(200, 100));
+		cshrBtn.setPreferredSize(new Dimension(150, 75));
 		cshrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

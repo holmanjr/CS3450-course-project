@@ -65,6 +65,7 @@ public class ProdDriver {
 	
 	public void createTable() throws SQLException{
 		ResultSet tables = conn.getMetaData().getTables(null, null, TNAME, null);
+		
 		if (tables.next()) {
 		  // Table exists
 		} 	
@@ -78,6 +79,8 @@ public class ProdDriver {
 					"name VARCHAR(30) not NULL," +
 					"price DECIMAL(10, 2) not null," + 
 					"qty INTEGER not null," + 
+					"supplier VARCHAR(60) not null," +
+					"contactInfo VARCHAR(60) not null," +
 					"PRIMARY KEY ( prodid ))";
 			
 			stmt.executeUpdate(sql);
@@ -156,12 +159,12 @@ public class ProdDriver {
 		return rs;
 	}
 	
-	public void addRow(String name, String price, String qty) throws SQLException{
+	public void addRow(String name, String price, String qty, String supplier, String contactInfo) throws SQLException{
 		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		stmt = conn.createStatement();
 		String sql = "INSERT INTO " + TNAME + 
-				"(name, price, qty)" +
-				"VALUES ('" + name + "', " + price + ", " + qty + ");";
+				"(name, price, qty, supplier, contactInfo)" +
+				"VALUES ('" + name + "', " + price + ", " + qty + ", '" + supplier + "', '" + contactInfo + "');";
 		stmt.executeUpdate(sql);
 		try{
 			if(stmt!=null)
@@ -176,14 +179,25 @@ public class ProdDriver {
 		}
 	}
 	
-	public void updateRow(Integer id, String name, Double price, Integer qty) throws SQLException{
+	public void updateRow(Integer id, String name, Double price, Integer qty, String supplier, String contactInfo) throws SQLException{
 		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		PreparedStatement pst = conn.prepareStatement
-				("UPDATE " + TNAME + " SET name=?, price=?, qty=? WHERE prodid=?");
+				("UPDATE " + TNAME + " SET name=?, price=?, qty=?, supplier=?, contactInfo=? WHERE prodid=?");
 		pst.setString(1, name);
 		pst.setDouble(2, price);	
 		pst.setInt(3, qty);
-		pst.setInt(4, id);
+		pst.setString(4, supplier);
+		pst.setString(5, contactInfo);
+		pst.setInt(6, id);
+		
+		pst.executeUpdate();
+	}
+	
+	public void deleteProduct(Integer id) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		PreparedStatement pst = conn.prepareStatement
+				("DELETE FROM " + TNAME + " WHERE prodid=?");
+		pst.setInt(1, id);
 		
 		pst.executeUpdate();
 	}

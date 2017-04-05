@@ -1,25 +1,19 @@
 package cs3450.cashregister.Management;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Databases.Employee;
 import cs3450.cashregister.Databases.ProdDriver;
@@ -33,14 +27,16 @@ public class NewProduct implements ActionListener{
 	private JFrame frame = new JFrame("Add New Product");
 	private InventoryScreen invScreen;
 	private ProdDriver driver = new ProdDriver("products");
-	private JPanel lblPanel = new JPanel();
-	private JLabel nameLbl = new JLabel("Name", SwingConstants.CENTER);
-	private JLabel priceLbl = new JLabel("Price", SwingConstants.CENTER);
-	private JLabel qtyLbl = new JLabel("Qty", SwingConstants.CENTER);
-	private JPanel txtPanel = new JPanel();
+	private JLabel nameLbl = new JLabel("Name: ");
+	private JLabel priceLbl = new JLabel("Price: ");
+	private JLabel qtyLbl = new JLabel("Qty: ");
+	private JLabel suppLbl = new JLabel("Supplier: ");
+	private JLabel contLbl = new JLabel("Contact Info: ");
 	private JTextField nameTxtFld = new JTextField(10);
 	private JTextField priceTxtFld = new JTextField(10);
 	private JTextField qtyTxtFld = new JTextField(10);
+	private JTextField suppTxtFld = new JTextField(10);
+	private JTextField contTxtFld = new JTextField(10);
 	private JPanel screen = new JPanel();
 	private JButton save = new JButton("Save");
 	private JButton back = new JButton("Back");
@@ -54,40 +50,48 @@ public class NewProduct implements ActionListener{
 		
 		JPanel pane = (JPanel)frame.getContentPane();
 		
-		screen.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		screen.setPreferredSize(new Dimension(600, 400));	
-
-		lblPanel.setLayout(new FlowLayout());
-		nameLbl.setPreferredSize(new Dimension(115, 15));
-		lblPanel.add(nameLbl, c);
-		priceLbl.setPreferredSize(new Dimension(115, 15));
-		lblPanel.add(priceLbl, c);
-		qtyLbl.setPreferredSize(new Dimension(115, 15));
-		lblPanel.add(qtyLbl, c);
+screen.setLayout(new BoxLayout(screen, BoxLayout.Y_AXIS));	
 		
-		txtPanel.setLayout(new FlowLayout());
-		txtPanel.add(nameTxtFld, c);
-		txtPanel.add(priceTxtFld, c);
-		txtPanel.add(qtyTxtFld, c);
+		JPanel namePanel = new JPanel();
+		namePanel.setLayout(new BorderLayout());
+		namePanel.add(nameLbl, BorderLayout.WEST);
+		namePanel.add(nameTxtFld, BorderLayout.EAST);
+		screen.add(namePanel);
 		
-		pane.add(screen);
+		JPanel pricePanel = new JPanel();
+		pricePanel.setLayout(new BorderLayout());
+		pricePanel.add(priceLbl, BorderLayout.WEST);
+		pricePanel.add(priceTxtFld, BorderLayout.EAST);
+		screen.add(pricePanel);
 		
-		c.insets = new Insets(0, 5, 0, 5);
-		c.gridx = 0;
-		c.gridy = 0;
-		screen.add(lblPanel, c);
-		c.insets = new Insets(5, 5, 5, 5);
-		c.gridy ++;
-		screen.add(txtPanel, c);
-		c.gridy ++;
+		JPanel qtyPanel = new JPanel();
+		qtyPanel.setLayout(new BorderLayout());
+		qtyPanel.add(qtyLbl, BorderLayout.WEST);
+		qtyPanel.add(qtyTxtFld, BorderLayout.EAST);
+		screen.add(qtyPanel);
+		
+		JPanel suppPanel = new JPanel();
+		suppPanel.setLayout(new BorderLayout());
+		suppPanel.add(suppLbl, BorderLayout.WEST);
+		suppPanel.add(suppTxtFld, BorderLayout.EAST);
+		screen.add(suppPanel);
+		
+		JPanel contPanel = new JPanel();
+		contPanel.setLayout(new BorderLayout());
+		contPanel.add(contLbl, BorderLayout.WEST);
+		contPanel.add(contTxtFld, BorderLayout.EAST);
+		screen.add(contPanel);
+		
+		JPanel btnPanel = new JPanel();
 		save.setPreferredSize(new Dimension(125, 25));
 		save.addActionListener(this);
-		screen.add(save, c);
-		c.gridy ++;
+		btnPanel.add(save);
 		back.setPreferredSize(new Dimension(125, 25));
 		back.addActionListener(this);
-		screen.add(back, c);
+		btnPanel.add(back);
+		screen.add(btnPanel);
+		
+		pane.add(screen);
 		
 		frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -101,7 +105,8 @@ public class NewProduct implements ActionListener{
 		{
 			if(!nameTxtFld.getText().isEmpty() && !priceTxtFld.getText().isEmpty() && !qtyTxtFld.getText().isEmpty()){
 				try {
-					driver.addRow(nameTxtFld.getText(), priceTxtFld.getText(), qtyTxtFld.getText());
+					driver.addRow(nameTxtFld.getText(), priceTxtFld.getText(), qtyTxtFld.getText(),
+							suppTxtFld.getText(), contTxtFld.getText());
 					new UpdateExisting(emp);
 					frame.dispose();
 				} catch (SQLException e1) {
