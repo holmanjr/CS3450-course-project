@@ -1,6 +1,3 @@
-/**
- * 
- */
 package cs3450.cashregister.Management;
 
 import java.awt.Dimension;
@@ -22,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Checkout.CashierScreen;
@@ -103,23 +101,45 @@ public class LoginScreen {
 	}
 
 	private void addActionListener(Employee emp, JButton usrBtn) {
-		if(emp.isManager()){
-			usrBtn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					frame.dispose();
-					new ManagerScreen(emp);
+				if(emp.isManager()){
+					usrBtn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							JPasswordField pf = new JPasswordField();
+							int okCxl = JOptionPane.showConfirmDialog(null, pf, "Enter Password for " + emp.getUsername(), 
+									JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+							if(okCxl == JOptionPane.OK_OPTION){
+								String password = new String(pf.getPassword());
+								if(password.equals(emp.getCode())){
+									frame.dispose();
+									new ManagerScreen(emp);
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Password is incorrect");
+								}
+							}
+						}
+					});
 				}
-			});
-		}
-		else{
-			usrBtn.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent arg0) {
-					frame.dispose();
-					new CashierScreen(emp);
-				}
-			});
+				else{
+					usrBtn.addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent arg0) {
+							JPasswordField pf = new JPasswordField();
+							int okCxl = JOptionPane.showConfirmDialog(null, pf, "Enter Password for " + emp.getUsername(), 
+									JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+							if(okCxl == JOptionPane.OK_OPTION){
+								String password = new String(pf.getPassword());
+								if(password.equals(emp.getCode())){
+									frame.dispose();
+									new CashierScreen(emp);
+								}
+								else{
+									JOptionPane.showMessageDialog(null, "Password is incorrect");
+								}
+							}
+						}
+					});
 		}
 	}
 
