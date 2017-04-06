@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import cs3450.cashregister.Databases.Employee;
@@ -63,6 +64,9 @@ public class PaymentScreen implements ActionListener {
 			new CreditCardScreen(cashier);
 		}
 		if (e.getSource() == cash){
+	    	Object given = JOptionPane.showInputDialog(frame, "How much cash was given?");
+	    	Float change = CheckoutScreen.total - Float.parseFloat((String) given);
+			JOptionPane.showMessageDialog(frame, "The change is: " + change);
 			frame.dispose();
 			new ReceiptScreen(); 
 		}

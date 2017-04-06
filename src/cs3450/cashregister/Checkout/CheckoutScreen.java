@@ -33,8 +33,8 @@ public class CheckoutScreen implements ActionListener {
 
 	private JFrame frame = new JFrame("Checkout");
 	private JPanel screen = new JPanel();
-	private JButton addb = new JButton("Add                     ");
-	private JButton removeb = new JButton("Remove                    ");
+	private JButton addb = new JButton("Add");
+	private JButton removeb = new JButton("Remove");
 	private JButton pay = new JButton("Pay");
 	private JButton startOver = new JButton("Start Over");
 	private JButton cancel = new JButton("Cancel");
@@ -82,9 +82,8 @@ public class CheckoutScreen implements ActionListener {
     }
     
     void clearAll(){
-    	for (int i = model.getRowCount() - 1; i > -1; i--){
-    		model.removeRow(i);
-    	}
+    	frame.dispose();
+    	new CheckoutScreen(cashier);
     }
 	
 	public CheckoutScreen(Employee cashier){
@@ -122,6 +121,7 @@ public class CheckoutScreen implements ActionListener {
 		panel.add(scrollPane);
 		panel.add(addb);
 		panel.add(removeb);
+		panel.add(startOver);
 		panel.add(pay);
 		panel.add(cancel); 
 		screen.add(panel);

@@ -47,6 +47,7 @@ public class LoginScreen {
 	
 	public LoginScreen() throws IOException, SQLException{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(800, 500));
 		
 		JPanel pane = (JPanel)frame.getContentPane();
 		
@@ -65,7 +66,9 @@ public class LoginScreen {
 		cashier.setStatus(false);
 		
 		JPanel btnPanel = new JPanel();
-		mngrBtn.setPreferredSize(new Dimension(150, 75));
+		
+		//uncomment if there are no active users. 
+		/*mngrBtn.setPreferredSize(new Dimension(150, 75));
 		mngrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,16 +86,16 @@ public class LoginScreen {
 			}
 		});
 		btnPanel.add(cshrBtn);
-		screen.add(btnPanel);
+		screen.add(btnPanel);*/
 		
 		JPanel usrPanel = new JPanel();
 		for(Vector<Object> row : driver.getTableData()){
 			URL url = new URL((String)row.get(3));
 			Image img1 = ImageIO.read(url);
-			Image img2 = img1.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+			Image img2 = img1.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 			ImageIcon imgIcon = new ImageIcon(img2);
 			JButton usrBtn = new JButton(imgIcon);
-			usrBtn.setPreferredSize(new Dimension(100, 100));
+			usrBtn.setPreferredSize(new Dimension(200, 200));
 			Employee emp = new Employee(row);
 			addActionListener(emp, usrBtn);
 			usrPanel.add(usrBtn);
