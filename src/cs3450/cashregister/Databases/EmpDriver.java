@@ -17,7 +17,7 @@ public class EmpDriver {
 	private final String DBURL = "jdbc:mysql://localhost:3306/";
 	private final String USER = "root";
 	private final String PASS = "root";
-	private final String DBNAME = "register";
+	private final String DBNAME = "register2";
 	private String TNAME = "employees";
 	private final String WARNSUP = "?useSSL=false";
 	private Connection conn = null;

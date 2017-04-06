@@ -12,7 +12,7 @@ public class ProdDriver {
 	private final String DBURL = "jdbc:mysql://localhost:3306/";
 	private final String USER = "root";
 	private final String PASS = "root";
-	private final String DBNAME = "register";
+	private final String DBNAME = "register222";
 	private String TNAME;
 	private final String WARNSUP = "?useSSL=false";
 	private Connection conn = null;
@@ -64,6 +64,7 @@ public class ProdDriver {
 	}
 	
 	public void createTable() throws SQLException{
+		
 		ResultSet tables = conn.getMetaData().getTables(null, null, TNAME, null);
 		
 		if (tables.next()) {
@@ -159,6 +160,25 @@ public class ProdDriver {
 		return rs;
 	}
 	
+	public ResultSet searchByName(String name) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		stmt = conn.createStatement();
+		Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+		PreparedStatement pst = conn.prepareStatement("SELECT * FROM " + TNAME +
+				" WHERE name = ?"); 
+		pst.setString(1, name);
+		ResultSet rs = pst.executeQuery();
+		colCount = rs.getMetaData().getColumnCount();
+		if(rs.next()){
+			Vector<Object> row = new Vector<Object>();
+			for(int i = 1; i <= colCount; i++){
+				row.add(rs.getObject(i));
+			}
+			data.add(row);
+		}
+		return rs;
+	}
+	
 	public void addRow(String name, String price, String qty, String supplier, String contactInfo) throws SQLException{
 		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
 		stmt = conn.createStatement();
@@ -175,6 +195,7 @@ public class ProdDriver {
 			if(conn!=null)
 				conn.close();
 		}catch(SQLException se){
+			System.out.println("adding row to table failed...");
 			se.printStackTrace();
 		}
 	}

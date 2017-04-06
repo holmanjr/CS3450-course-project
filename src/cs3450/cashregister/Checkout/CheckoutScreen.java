@@ -2,9 +2,13 @@ package cs3450.cashregister.Checkout;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -15,7 +19,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.jdbc.Statement;
+
 import cs3450.cashregister.Databases.Employee;
+import cs3450.cashregister.Databases.ProdDriver;
+import cs3450.cashregister.Management.UpdateProduct;
 
 public class CheckoutScreen implements ActionListener {
 
@@ -30,14 +38,30 @@ public class CheckoutScreen implements ActionListener {
 	private DefaultTableModel model = new DefaultTableModel(); 
 	public static JTable table;
 	public Employee cashier;
+	private UpdateProduct prod;
+	private ProdDriver driver = new ProdDriver("products");
+	private ResultSet rs;
+	
+	void search(int id){
+		
+	}
 
-    void addRow(){
-        Object newID = JOptionPane.showInputDialog(frame, "Enter ID");
+    void addRow() throws SQLException{
+    	/*Object newID = JOptionPane.showInputDialog(frame, "id");
         Object newName = JOptionPane.showInputDialog(frame, "Enter name");
         String newPrice = JOptionPane.showInputDialog(frame, "Enter price");
         total += Float.parseFloat(newPrice);
         Object newAmount = JOptionPane.showInputDialog(frame, "Enter amount");
-    	model.addRow(new Object[]{newID, newName, newPrice, newAmount});
+    	model.addRow(new Object[]{newID, newName, newPrice, newAmount});*/
+    	
+    	Object name = JOptionPane.showInputDialog(frame, "name");
+		rs = driver.searchByName(name.toString());
+    	
+    	String id = rs.getString("prodid");
+    	String amount = rs.getString("qty");
+    	
+    	System.out.println(id + " " + amount);
+    	
     }
     
     void removeRow(){
@@ -63,9 +87,8 @@ public class CheckoutScreen implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE );
 		JPanel pane = (JPanel)frame.getContentPane();
-		screen.setLayout(new BorderLayout());
-		pane.setPreferredSize(new Dimension(800, 500));
-		pane.setSize(50, 50);
+		screen.setLayout(new FlowLayout());
+		
 		
 		//add listeners to the buttons
 		pay.addActionListener(this);
@@ -93,7 +116,12 @@ public class CheckoutScreen implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == addb){
-			addRow();
+			try {
+				addRow();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if (e.getSource() == pay) {
 			frame.dispose();
