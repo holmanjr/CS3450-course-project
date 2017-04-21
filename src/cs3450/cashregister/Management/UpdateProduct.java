@@ -114,6 +114,7 @@ public class UpdateProduct implements ActionListener{
 				driver.updateRow(id, nameTxtFld.getText(), Double.parseDouble(priceTxtFld.getText()), 
 						Integer.parseInt(qtyTxtFld.getText()), suppTxtFld.getText(), contTxtFld.getText());
 				new UpdateExisting(emp);
+				frame.dispose();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

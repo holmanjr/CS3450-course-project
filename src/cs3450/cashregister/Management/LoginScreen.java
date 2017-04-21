@@ -47,7 +47,7 @@ public class LoginScreen {
 	
 	public LoginScreen() throws IOException, SQLException{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(800, 500));
+		//frame.setPreferredSize(new Dimension(800, 500));
 		
 		JPanel pane = (JPanel)frame.getContentPane();
 		
