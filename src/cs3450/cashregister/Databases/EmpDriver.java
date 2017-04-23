@@ -81,7 +81,7 @@ public class EmpDriver {
 					"(empid INTEGER not NULL AUTO_INCREMENT," + 
 					"username VARCHAR(30) not NULL," +
 					"code VARCHAR(30) not null," + 
-					"imageURL VARCHAR(100) not null," + 
+					"imageURL VARCHAR(2083) not null," + 
 					"status BOOLEAN not null," +
 					"PRIMARY KEY ( empid ))";
 			
@@ -224,6 +224,16 @@ public class EmpDriver {
 		pst.setString(2, code);	
 		pst.setString(3, imageURL);
 		pst.setInt(4, id);
+		
+		pst.executeUpdate();
+	}
+	
+	public void setStatus(int empID, Boolean status) throws SQLException{
+		conn = DriverManager.getConnection(DBURL + DBNAME + WARNSUP, USER, PASS);
+		PreparedStatement pst = conn.prepareStatement
+				("UPDATE " + TNAME + " SET status=? WHERE empid=?");
+		pst.setBoolean(1, status);
+		pst.setInt(2, empID);
 		
 		pst.executeUpdate();
 	}

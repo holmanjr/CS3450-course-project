@@ -27,12 +27,14 @@ import cs3450.cashregister.Databases.Employee;
  */
 public class ManagerScreen {
 	
+	private RevenueScreen revScrn;
 	private JFrame frame = new JFrame("Manager Screen");
 	private JPanel screen = new JPanel();
 	private JLabel title;
 	private JButton usrSttngsBtn = new JButton("User Settings");
 	private JButton invBtn = new JButton("Manage Inventory");
 	private JButton empBtn = new JButton("Manage Empoyees");
+	private JButton revBtn = new JButton("Revenue Data");
 	private JButton logoutBtn = new JButton("Logout");
 	
 	public ManagerScreen(Employee emp){
@@ -95,6 +97,16 @@ public class ManagerScreen {
 			}
 		});
 		panel.add(empBtn);
+		
+		/*revBtn.setPreferredSize(new Dimension(200, 100));
+		revBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				revScrn = new RevenueScreen(emp);
+			}
+		});
+		panel.add(revBtn);*/
 		screen.add(panel);
 		
 		JPanel bottomPanel = new JPanel();

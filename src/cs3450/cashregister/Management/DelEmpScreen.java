@@ -21,12 +21,13 @@ import cs3450.cashregister.Databases.Employee;
 public class DelEmpScreen {
 	
 	private EmpDriver driver = new EmpDriver();
-	private JFrame frame = new JFrame("Delete Employees");
+	private JFrame frame = new JFrame("Edit Employees");
 	private JPanel screen = new JPanel();
 	private JTable empTable;
 	private JScrollPane scrollpane;
 	private JLabel idLbl = new JLabel("Enter ID of Employee to Delete: ");
 	private JTextField idTxtFld = new JTextField(10);
+	private JButton editBtn = new JButton("Edit");
 	private JButton delBtn = new JButton("Delete");
 	private JButton finBtn = new JButton("Finished");
 	
@@ -51,6 +52,14 @@ public class DelEmpScreen {
 		screen.add(idPanel);
 		
 		JPanel btnPanel = new JPanel();
+		editBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EmpStatusScreen(emp, Integer.parseInt(idTxtFld.getText()));
+				frame.dispose();
+			}
+		});
+		btnPanel.add(editBtn);
 		delBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

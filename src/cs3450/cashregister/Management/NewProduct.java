@@ -50,7 +50,7 @@ public class NewProduct implements ActionListener{
 		
 		JPanel pane = (JPanel)frame.getContentPane();
 		
-screen.setLayout(new BoxLayout(screen, BoxLayout.Y_AXIS));	
+		screen.setLayout(new BoxLayout(screen, BoxLayout.Y_AXIS));	
 		
 		JPanel namePanel = new JPanel();
 		namePanel.setLayout(new BorderLayout());

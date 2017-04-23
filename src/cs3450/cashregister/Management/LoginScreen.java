@@ -3,6 +3,7 @@ package cs3450.cashregister.Management;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -38,6 +40,7 @@ public class LoginScreen {
 	private JFrame frame = new JFrame("Cash Register System");
 	private JPanel screen = new JPanel();
 	private JLabel msgLbl = new JLabel("Click your Image to Login");
+	private JScrollPane scrollpane;
 	private JButton mngrBtn = new JButton("Manager");
 	private JButton cshrBtn = new JButton("Cashier");
 	private Employee manager, cashier;
@@ -65,10 +68,10 @@ public class LoginScreen {
 		cashier.setUsername("cashier");
 		cashier.setStatus(false);
 		
-		JPanel btnPanel = new JPanel();
+		/*JPanel btnPanel = new JPanel();
 		
 		//uncomment if there are no active users. 
-		/*mngrBtn.setPreferredSize(new Dimension(150, 75));
+		mngrBtn.setPreferredSize(new Dimension(150, 75));
 		mngrBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -89,7 +92,9 @@ public class LoginScreen {
 		screen.add(btnPanel);*/
 		
 		JPanel usrPanel = new JPanel();
+		usrPanel.setLayout(new GridLayout(0, 3));
 		for(Vector<Object> row : driver.getTableData()){
+			JPanel tmpPanel = new JPanel();
 			URL url = new URL((String)row.get(3));
 			Image img1 = ImageIO.read(url);
 			Image img2 = img1.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
@@ -98,9 +103,12 @@ public class LoginScreen {
 			usrBtn.setPreferredSize(new Dimension(200, 200));
 			Employee emp = new Employee(row);
 			addActionListener(emp, usrBtn);
-			usrPanel.add(usrBtn);
+			tmpPanel.add(usrBtn);
+			usrPanel.add(tmpPanel);
 		}
-		screen.add(usrPanel);
+		scrollpane = new JScrollPane(usrPanel);
+		scrollpane.setPreferredSize(new Dimension(635, 410));
+		screen.add(scrollpane);
 		
 		pane.add(screen);
 		

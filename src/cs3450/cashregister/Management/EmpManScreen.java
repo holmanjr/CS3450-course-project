@@ -26,7 +26,7 @@ public class EmpManScreen {
 	private JFrame frame = new JFrame("Employee Management");
 	private JPanel screen = new JPanel();
 	private JButton addEmpBtn = new JButton("Add Employee");
-	private JButton delEmpBtn = new JButton("Delete Employee");
+	private JButton delEmpBtn = new JButton("Edit Employees");
 	private JButton backBtn = new JButton("Back");
 	
 	public EmpManScreen(Employee emp){

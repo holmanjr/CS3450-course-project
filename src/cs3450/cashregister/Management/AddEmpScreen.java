@@ -82,9 +82,15 @@ public class AddEmpScreen {
 				if(!usrNmTxtFld.getText().isEmpty() && !codeTxtFld.getText().isEmpty() 
 						&& !picTxtFld.getText().isEmpty() && !posTxtFld.getText().isEmpty()){
 					try {
-						driver.addEmployee(usrNmTxtFld.getText(), codeTxtFld.getText(), 
-								picTxtFld.getText(), posTxtFld.getText());
-						JOptionPane.showMessageDialog(null, "Employee successfully added!");
+						if(posTxtFld.getText().equals("Manager")||posTxtFld.getText().equals("manager")
+								||posTxtFld.getText().equals("Cashier")||posTxtFld.getText().equals("cashier")){
+							driver.addEmployee(usrNmTxtFld.getText(), codeTxtFld.getText(), 
+									picTxtFld.getText(), posTxtFld.getText());
+							JOptionPane.showMessageDialog(null, "Employee successfully added!");
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Postion not recognized");
+						}
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
