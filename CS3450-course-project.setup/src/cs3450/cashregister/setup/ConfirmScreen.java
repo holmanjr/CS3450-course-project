@@ -4,40 +4,35 @@
 package cs3450.cashregister.setup;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 /**
  * @author Jason Holman Boden Archuleta
  *
  */
-public class LocationScreen {
+public class ConfirmScreen {
 	
 	private JPanel screen = new JPanel();
 	private JLabel title = new JLabel("Cash Register Application");
+	private JTextArea textArea = new JTextArea();
 	private JButton nextBtn = new JButton("Next");
 	private JButton prevBtn = new JButton("Previous");
-	private JTextField pathField = new JTextField();
-	private JButton browseBtn = new JButton("Browse");
-	private JFileChooser fileChooser = new JFileChooser();
 	Installation installation;
 
-	public LocationScreen(JFrame frame, Installation install) {
+	public ConfirmScreen(JFrame frame, Installation install) {
 		JPanel pane = (JPanel)frame.getContentPane();
 		installation = install;
 		
@@ -51,33 +46,11 @@ public class LocationScreen {
 		cntrPanel.setLayout(new BoxLayout(cntrPanel, BoxLayout.Y_AXIS));
 		screen.add(cntrPanel, BorderLayout.CENTER);
 		
-		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		
-		JPanel filePanel = new JPanel();
-		filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.X_AXIS));
-		
-		filePanel.add(new JLabel("Installation path:"));
-		filePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-		
-		pathField.setText(installation.getInstallationLocation());
-		pathField.setMaximumSize(new Dimension(600, 32));
-		filePanel.add(pathField);
-		filePanel.add(Box.createRigidArea(new Dimension(10, 0)));
-		
-		browseBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int returnVal = fileChooser.showOpenDialog(frame);
-				
-				if(returnVal == JFileChooser.APPROVE_OPTION){
-					File file = fileChooser.getSelectedFile();
-					String path = file.getAbsolutePath();
-					pathField.setText(path);
-					installation.setInstallationLocation(path);
-				}
-			}
-		});
-		filePanel.add(browseBtn);
+		String statusText = installation.getInstallationSetting();
+		textArea.setText(statusText);
+		textArea.setEditable(false);
+		JScrollPane scrollpane = new JScrollPane(textArea);
+		cntrPanel.add(scrollpane);
 		
 		JPanel bttmPanel = new JPanel();
 		bttmPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 10));
@@ -86,7 +59,7 @@ public class LocationScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				pane.remove(screen);
-				new WelcomeScreen(frame);
+				new ConfigScreen(frame, installation);
 			}
 		});
 		bttmPanel.add(prevBtn);
@@ -94,15 +67,13 @@ public class LocationScreen {
 		nextBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				pane.remove(screen);
-				new ConfigScreen(frame, installation);
+				installation.install();
+				JOptionPane.showMessageDialog(frame, "Not implemented yet!");
 			}
 		});
 		bttmPanel.add(nextBtn);
 		
 		screen.add(bttmPanel, BorderLayout.SOUTH);
-		
-		cntrPanel.add(filePanel);
 		
 		pane.add(screen);
 		
