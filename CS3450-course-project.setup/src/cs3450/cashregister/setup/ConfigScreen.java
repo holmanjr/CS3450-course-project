@@ -29,7 +29,8 @@ public class ConfigScreen {
 	
 	private JPanel screen = new JPanel();
 	private JLabel title = new JLabel("Cash Register Application");
-	private JLabel infoLbl = new JLabel("Enter your MySQL hostname and password.");
+	private JLabel infoLbl = new JLabel("Enter your MySQL Database name, hostname, and password.");
+	private JTextField dbField = new JTextField();
 	private JTextField hostField = new JTextField();
 	private JPasswordField passField = new JPasswordField();
 	private JButton nextBtn = new JButton("Next");
@@ -50,6 +51,17 @@ public class ConfigScreen {
 		cntrPanel.setLayout(new BoxLayout(cntrPanel, BoxLayout.Y_AXIS));
 		infoLbl.setFont(new Font("Serif", Font.PLAIN, 16));
 		cntrPanel.add(infoLbl);
+		
+		JPanel dbPanel = new JPanel();
+		dbPanel.setLayout(new BoxLayout(dbPanel, BoxLayout.X_AXIS));
+		
+		dbPanel.add(new JLabel("DB Name:  "));
+		dbPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+		
+		dbField.setMaximumSize(new Dimension(500, 32));
+		dbPanel.add(dbField);
+		
+		cntrPanel.add(dbPanel);
 		
 		JPanel hostPanel = new JPanel();
 		hostPanel.setLayout(new BoxLayout(hostPanel, BoxLayout.X_AXIS));
@@ -91,7 +103,7 @@ public class ConfigScreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String password = new String(passField.getPassword());
-				installation.setConfigVariables(hostField.getText(), password);
+				installation.setConfigVariables(dbField.getText(), hostField.getText(), password);
 				pane.remove(screen);
 				new ConfirmScreen(frame, installation);
 			}
