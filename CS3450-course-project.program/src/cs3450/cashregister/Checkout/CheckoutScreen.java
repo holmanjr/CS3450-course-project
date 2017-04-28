@@ -1,17 +1,12 @@
 package cs3450.cashregister.Checkout;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.util.Vector;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -23,11 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.jdbc.Statement;
-
 import cs3450.cashregister.Databases.Employee;
 import cs3450.cashregister.Databases.ProdDriver;
-import cs3450.cashregister.Management.UpdateProduct;
 
 public class CheckoutScreen implements ActionListener {
 

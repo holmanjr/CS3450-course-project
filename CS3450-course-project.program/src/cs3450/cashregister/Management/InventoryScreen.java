@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Databases.Employee;
 
@@ -22,8 +21,6 @@ import cs3450.cashregister.Databases.Employee;
  */
 public class InventoryScreen implements ActionListener{
 	
-	private UpdateExisting updateScreen;
-	private NewProduct newProd;
 	private JFrame frame = new JFrame("Inventory Management");
 	private JPanel focusBtns = new JPanel();
 	private JPanel screen = new JPanel();
@@ -81,7 +78,7 @@ public class InventoryScreen implements ActionListener{
 		if(tmp == update)
 		{
 			try {
-				updateScreen = new UpdateExisting(emp);
+				new UpdateExisting(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -95,7 +92,7 @@ public class InventoryScreen implements ActionListener{
 		else if(tmp == addNew)
 		{
 			try {
-				newProd = new NewProduct(emp);
+				new NewProduct(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block

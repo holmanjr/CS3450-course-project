@@ -25,7 +25,6 @@ import cs3450.cashregister.Databases.ProdDriver;
 public class NewProduct implements ActionListener{
 	
 	private JFrame frame = new JFrame("Add New Product");
-	private InventoryScreen invScreen;
 	private ProdDriver driver = new ProdDriver("products");
 	private JLabel nameLbl = new JLabel("Name: ");
 	private JLabel priceLbl = new JLabel("Price: ");
@@ -124,7 +123,7 @@ public class NewProduct implements ActionListener{
 		else if(tmp == back)
 		{
 			try {
-				invScreen = new InventoryScreen(emp);
+				new InventoryScreen(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block

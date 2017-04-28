@@ -14,17 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import cs3450.cashregister.Databases.Employee;
-import cs3450.cashregister.Databases.OrderDriver;
 
 /**
  * @author Jason Holman Boden Archuleta
  *
  */
 public class RevenueScreen {
-	private ManagerScreen mngrScrn;
 	private JFrame frame = new JFrame("Revenue Report");
 	private JPanel screen = new JPanel();
-	private OrderDriver driver = new OrderDriver();
+	//private OrderDriver driver = new OrderDriver();
 	private JButton searchBtn = new JButton("Search");
 	private JButton backBtn = new JButton("Back");
 	private JLabel idLbl = new JLabel("Customer/Product ID: ");
@@ -72,7 +70,7 @@ public class RevenueScreen {
 		backBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mngrScrn = new ManagerScreen(emp);
+				new ManagerScreen(emp);
 				frame.dispose();
 			}
 		});

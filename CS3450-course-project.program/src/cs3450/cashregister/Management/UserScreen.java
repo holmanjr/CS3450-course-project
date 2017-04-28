@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 import cs3450.cashregister.Checkout.CashierScreen;
 import cs3450.cashregister.Databases.EmpDriver;

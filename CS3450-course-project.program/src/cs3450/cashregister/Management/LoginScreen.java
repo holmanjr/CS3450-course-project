@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -41,12 +40,6 @@ public class LoginScreen {
 	private JPanel screen = new JPanel();
 	private JLabel msgLbl = new JLabel("Click your Image to Login");
 	private JScrollPane scrollpane;
-	private JButton mngrBtn = new JButton("Manager");
-	private JButton cshrBtn = new JButton("Cashier");
-	private Employee manager, cashier;
-	
-	//Array of images that represent employees
-	private ImageIcon avatars = new ImageIcon();
 	
 	public LoginScreen() throws IOException, SQLException{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,34 +55,6 @@ public class LoginScreen {
 		msgLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		titlePanel.add(msgLbl);
 		screen.add(titlePanel);
-		
-		manager = new Employee();
-		cashier = new Employee();
-		cashier.setUsername("cashier");
-		cashier.setStatus(false);
-		
-		/*JPanel btnPanel = new JPanel();
-		
-		//uncomment if there are no active users. 
-		mngrBtn.setPreferredSize(new Dimension(150, 75));
-		mngrBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				new ManagerScreen(manager);
-			}
-		});
-		btnPanel.add(mngrBtn);
-		cshrBtn.setPreferredSize(new Dimension(150, 75));
-		cshrBtn.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-				new CashierScreen(cashier);
-			}
-		});
-		btnPanel.add(cshrBtn);
-		screen.add(btnPanel);*/
 		
 		JPanel usrPanel = new JPanel();
 		usrPanel.setLayout(new GridLayout(0, 3));

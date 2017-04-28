@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Databases.Employee;
 
@@ -27,7 +26,6 @@ import cs3450.cashregister.Databases.Employee;
  */
 public class ManagerScreen {
 	
-	private RevenueScreen revScrn;
 	private JFrame frame = new JFrame("Manager Screen");
 	private JPanel screen = new JPanel();
 	private JLabel title;
@@ -98,15 +96,15 @@ public class ManagerScreen {
 		});
 		panel.add(empBtn);
 		
-		/*revBtn.setPreferredSize(new Dimension(200, 100));
+		revBtn.setPreferredSize(new Dimension(200, 100));
 		revBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				revScrn = new RevenueScreen(emp);
+				new RevenueScreen(emp);
 			}
 		});
-		panel.add(revBtn);*/
+		panel.add(revBtn);
 		screen.add(panel);
 		
 		JPanel bottomPanel = new JPanel();

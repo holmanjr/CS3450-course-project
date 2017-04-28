@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import cs3450.cashregister.Checkout.CashierScreen;
 import cs3450.cashregister.Databases.EmpDriver;
 import cs3450.cashregister.Databases.Employee;
 

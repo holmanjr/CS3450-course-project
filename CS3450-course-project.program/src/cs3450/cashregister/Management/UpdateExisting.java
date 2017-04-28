@@ -1,11 +1,7 @@
 package cs3450.cashregister.Management;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -19,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 import cs3450.cashregister.Databases.Employee;
 import cs3450.cashregister.Databases.ProdDriver;
@@ -30,8 +25,6 @@ import cs3450.cashregister.Databases.ProdDriver;
  */
 public class UpdateExisting implements ActionListener{
 	
-	private InventoryScreen invScreen;
-	private UpdateProduct updProd;
 	private ProdDriver driver = new ProdDriver("products");
 	private JFrame frame = new JFrame("Choose Existing Product");
 	private JPanel screen = new JPanel();
@@ -93,7 +86,7 @@ public class UpdateExisting implements ActionListener{
 		if(tmp == back)
 		{
 			try {
-				invScreen = new InventoryScreen(emp);
+				new InventoryScreen(emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -103,7 +96,7 @@ public class UpdateExisting implements ActionListener{
 		else if(tmp == submit)
 		{
 			try {
-				updProd = new UpdateProduct(driver.selectRow(text.getText()), emp);
+				new UpdateProduct(driver.selectRow(text.getText()), emp);
 				frame.dispose();
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
