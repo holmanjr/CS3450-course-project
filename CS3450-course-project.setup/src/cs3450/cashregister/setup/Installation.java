@@ -6,12 +6,7 @@ package cs3450.cashregister.setup;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author Jason Holman Boden Archuleta
@@ -22,6 +17,8 @@ public class Installation {
 	private String dbName;
 	private String dbHostname;
 	private String dbPassword;
+	private String logName;
+	private String logPass;
 	private StringBuilder installationStatus;
 	private boolean installedSuccessfully;
 	
@@ -65,19 +62,19 @@ public class Installation {
 			
 			File installedDbFolder = new File(installationLocation + "\\database\\");
 			installedDbFolder.mkdirs();
+			File dbFile = new File("database\\config.properties");
+			File installedDbFile = new File(installedDbFolder.getAbsolutePath() + "\\config.properties");
 			
 		    PrintWriter writer = new PrintWriter("database\\config.properties", "UTF-8");
 		    writer.println("database=" + dbName);
 		    writer.println("dbuser=" + dbHostname);
 		    writer.println("dbpassword=" + dbPassword);
+		    writer.println("loginuser=" + logName);
+		    writer.println("loginpass=" + logPass);
 		    writer.close();
+		    
+		    copyFile(dbFile, installedDbFile);
 
-//			
-//			List<String> lines = Arrays.asList("database=" + dbName, 
-//					"dbuser=" + dbHostname,
-//					"dbpassword=" + dbPassword);
-//			Path file = Paths.get("database\\config.properties");
-//			Files.write(file, lines, Charset.forName("UTF-8"));
 			installationStatus.append("Database setup.\n");
 			
 			installationStatus.append("Program has been successfully installed!\n");
@@ -99,7 +96,10 @@ public class Installation {
 		sb.append('\n');
 		sb.append("DB Name: " + dbName + '\n');
 		sb.append("Hostname: " + dbHostname + '\n');
-		sb.append("Password: *******\n");
+		sb.append("Password: ********\n");
+		sb.append('\n');
+		sb.append("Username: " + logName + '\n');
+		sb.append("User Password: ********\n");
 		return sb.toString();
 	}
 
@@ -109,6 +109,11 @@ public class Installation {
 
 	public boolean isSuccessful() {
 		return installedSuccessfully;
+	}
+
+	public void setUserVariables(String username, String password) {
+		logName = username;
+		logPass = password;
 	}
 
 }

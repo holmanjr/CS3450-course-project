@@ -15,7 +15,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -105,7 +104,7 @@ public class ConfigScreen {
 				String password = new String(passField.getPassword());
 				installation.setConfigVariables(dbField.getText(), hostField.getText(), password);
 				pane.remove(screen);
-				new ConfirmScreen(frame, installation);
+				new UserSetupScreen(frame, installation);
 			}
 		});
 		bttmPanel.add(nextBtn);

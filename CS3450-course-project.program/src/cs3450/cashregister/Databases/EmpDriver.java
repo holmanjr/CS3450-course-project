@@ -21,6 +21,8 @@ public class EmpDriver {
 	private String USER;
 	private String PASS;
 	private String DBNAME;
+	private String logName;
+	private String logPass;
 	private String TNAME = "employees";
 	private final String WARNSUP = "?useSSL=false";
 	private Connection conn = null;
@@ -38,6 +40,8 @@ public class EmpDriver {
 			DBNAME = (String)appSettings.get("database");
 			USER = (String)appSettings.get("dbuser");
 			PASS = (String)appSettings.get("dbpassword");
+			logName = (String)appSettings.get("loginuser");
+			logPass = (String)appSettings.get("loginpass");
 			fis.close();
 			}catch(IOException e){
 				e.printStackTrace();
@@ -102,6 +106,13 @@ public class EmpDriver {
 					"PRIMARY KEY ( empid ))";
 			
 			stmt.executeUpdate(sql);
+			
+			String imageURL = "http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Boss-2-icon.png";
+			
+			String sq = "INSERT INTO " + TNAME + 
+					"(username, code, imageURL, status)" +
+					"VALUES ('" + logName + "', '" + logPass + "', '" + imageURL + "', " + true + ");";
+			stmt.executeUpdate(sq);
 			System.out.println("Created table in given database...");
 		}
 	}

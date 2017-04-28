@@ -6,14 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +26,8 @@ public class WelcomeScreen {
 	private JLabel title = new JLabel("Cash Register Application");
 	private JLabel infoLbl = new JLabel("This is your installation wizard to help "
 			+ "you install the Cash Register Application.");
+	private JLabel infoLbl2 = new JLabel("You will need MySQL installed on your machine "
+			+ "in order for this program to work.");
 	private JButton nextBtn = new JButton("Next");
 	
 	public WelcomeScreen(){
@@ -49,6 +48,7 @@ public class WelcomeScreen {
 		JPanel cntrPanel = new JPanel();
 		cntrPanel.setLayout(new BoxLayout(cntrPanel, BoxLayout.Y_AXIS));
 		cntrPanel.add(infoLbl);
+		cntrPanel.add(infoLbl2);
 		screen.add(cntrPanel, BorderLayout.CENTER);
 		
 		JPanel bttmPanel = new JPanel();
