@@ -96,7 +96,9 @@ public class OrderDriver {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS " + TNAME +
 					"(ordid INTEGER not NULL AUTO_INCREMENT," + 
-					"cost FLOAT not NULL," + 
+					"custid INTEGER not NULL," + 
+					"totalprice DECIMAL(10,2) not null," +
+					"date DATE not null," +
 					"PRIMARY KEY ( ordid ))";
 			
 			stmt.executeUpdate(sql);
