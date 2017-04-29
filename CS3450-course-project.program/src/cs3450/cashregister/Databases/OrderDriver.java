@@ -3,12 +3,15 @@
  */
 package cs3450.cashregister.Databases;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Vector;
 
 /**
@@ -18,9 +21,9 @@ import java.util.Vector;
 public class OrderDriver {
 	
 	private final String DBURL = "jdbc:mysql://localhost:3306/";
-	private final String USER = "root";
-	private final String PASS = "root";
-	private final String DBNAME = "register2";
+	private final String USER;
+	private final String PASS;
+	private final String DBNAME;
 	private String TNAME = "employees";
 	private final String WARNSUP = "?useSSL=false";
 	private Connection conn = null;
@@ -29,7 +32,18 @@ public class OrderDriver {
 	private Vector<String> headers;
 	private Vector<Vector<Object>> tableData;
 	
-	public OrderDriver(){
+	public OrderDriver() throws IOException{
+		
+			Properties appSettings = new Properties();
+			FileInputStream fis = new FileInputStream("database\\config.properties");
+			appSettings.load(fis);
+			
+			DBNAME = (String)appSettings.get("database");
+			USER = (String)appSettings.get("dbuser");
+			PASS = (String)appSettings.get("dbpassword");
+			fis.close();
+			
+		
 		try{
 			conn = DriverManager.getConnection(DBURL + WARNSUP, USER, PASS);
 			createDB();

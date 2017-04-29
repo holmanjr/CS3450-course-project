@@ -1,18 +1,21 @@
 package cs3450.cashregister.Databases;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 import java.util.Vector;
 
 public class ProdDriver {
 	private final String DBURL = "jdbc:mysql://localhost:3306/";
-	private final String USER = "root";
-	private final String PASS = "root";
-	private final String DBNAME = "register222";
+	private String USER;
+	private String PASS;
+	private String DBNAME;
 	private String TNAME;
 	private final String WARNSUP = "?useSSL=false";
 	private Connection conn = null;
@@ -23,6 +26,20 @@ public class ProdDriver {
 	
 	public ProdDriver(String tName){
 		TNAME = tName;
+		
+		try{
+			Properties appSettings = new Properties();
+			FileInputStream fis = new FileInputStream("database\\config.properties");
+			appSettings.load(fis);
+			
+			DBNAME = (String)appSettings.get("database");
+			USER = (String)appSettings.get("dbuser");
+			PASS = (String)appSettings.get("dbpassword");
+			fis.close();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+		
 		try{
 			conn = DriverManager.getConnection(DBURL + WARNSUP, USER, PASS);
 			createDB(DBNAME);
